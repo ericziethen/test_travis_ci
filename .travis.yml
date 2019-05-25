@@ -18,6 +18,5 @@ install:
 script:
   - dev/run_tests.bat
 
-env:
-  global:
-  - CODECOV_TOKEN=4db8d05e-0876-4ebf-96ac-1b29b4f7f737
+after_success:
+  - codecov

@@ -13,7 +13,7 @@ matrix:
 
 install:
     - pip install --upgrade pip setuptools
-    - pip intall  -r Requirements/requirements-dev-local.txt
+    - pip install  -r Requirements/requirements-dev-local.txt
     - pip install .
 
 script:

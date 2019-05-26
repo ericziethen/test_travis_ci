@@ -1,6 +1,10 @@
 
 language: python
 
+branches:
+  only:
+  - master
+
 matrix:
   include:
     - os: windows

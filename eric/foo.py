@@ -9,3 +9,7 @@ def get_version():
 
 def untested_function():
     return 'I\'m not tested'
+
+
+def another_untested_function():
+    return 'I\'m not tested'

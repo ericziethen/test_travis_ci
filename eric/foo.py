@@ -22,6 +22,7 @@ def yet_another_untested_function():
 
 
 def and_yet_another_untested_function():
+    """Complain about not being tested."""
     for x in range(100):
         print('Test me Please, Please')
     return 'I\'m not tested as well, are you serious?'

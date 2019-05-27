@@ -44,11 +44,6 @@ echo "### Linting finished ###"
 
 if [ "$ERROR_FOUND" = true ];
 then
-    echo 'Be careful not to fall off!'
-if
-
-if [[ $return_code -eq  0 ]];
-then
     echo "!!! NO LINTING ISSUE FOUND"
     exit 0
 else

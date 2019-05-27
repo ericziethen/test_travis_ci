@@ -5,6 +5,7 @@ cache: pip
 
 os:
   - linux
+  - windows
 
 branches:
   only:
@@ -17,8 +18,12 @@ matrix:
       sudo: true
 
 before_install:
-  - echo $TRAVIS_OS_NAME
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install python3; export PATH="/c/Python37:/c/Python37/Scripts:$PATH"; fi
+  - echo TRAVIS_OS_NAME - $TRAVIS_OS_NAME
+  - if [ "$TRAVIS_OS_NAME" = "windows" ];
+    then
+      choco install python3;
+      export PATH="/c/Python37:/c/Python37/Scripts:$PATH";
+      fi
   - python -m pip install --upgrade pip
 
 install:
@@ -29,10 +34,10 @@ script:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests.bat; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; 
     then
-    echo PWD - "$PWD";
-    ls;
-    echo TRAVIS_BUILD_DIR "$TRAVIS_BUILD_DIR";
-    ./dev/run_tests.sh;
+      echo PWD - "$PWD";
+      ls;
+      echo TRAVIS_BUILD_DIR "$TRAVIS_BUILD_DIR";
+      ./dev/run_tests.sh;
     fi
 
 after_success:

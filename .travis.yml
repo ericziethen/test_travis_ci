@@ -1,7 +1,7 @@
 
 language: python
 
-cache: pip
+#cache: pip
 
 #os:
 #  - linux
@@ -14,27 +14,21 @@ branches:
 matrix:
     include:
         - os: linux
-          python: 3.7.3
+          python: "3.7.3"
           dist: xenial
           sudo: true
         - os: windows
           language: sh
-          python: "3.7"
+          python: "3.7.3"
           before_install:
                 - choco install python3
                 - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
 
 before_install:
-  - echo TRAVIS_OS_NAME - $TRAVIS_OS_NAME
-  - if [ "$TRAVIS_OS_NAME" = "windows" ];
-    then
-      choco install python3;
-      export PATH="/c/Python37:/c/Python37/Scripts:$PATH";
-      fi
   - python -m pip install --upgrade pip
 
 install:
-    - pip install --upgrade pip setuptools
+    - pip install --upgrade pip setuptools 
     - pip install -r Requirements/requirements-dev-local.txt
 
 script:

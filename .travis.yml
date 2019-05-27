@@ -53,26 +53,3 @@ script:
 
 after_success:
   - codecov
-
-
-
-jobs:
-  include:
-    - stage: "compile"
-      script: echo "STAGE:compile"
-    - stage: "test"
-      name: "Unit Tests"
-      script: echo "STAGE:Unit Tests"
-    - script: echo "STAGE:Integration Tests"
-      name: "Integration Tests"
-    - stage: deploy
-      name: "Deploy to GCP"
-      script: echo "Deploy to GCP"
-
-
-stages:
-  - compile
-  - test
-  - deploy
-
-

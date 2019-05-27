@@ -1,39 +1,31 @@
 #!/bin/bash
 
-BASEPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-BASEDIR=$(dirname "$0")
-PROJ_MAIN_DIR=$BASEPATH/..
-PACKAGE_ROOT=eric
-PACKAGE_PATH=$PROJ_MAIN_DIR/$PACKAGE_ROOT
+MODULE_NAME=eric
+SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+PROJ_MAIN_DIR=$SCRIPT_PATH/..
+PACKAGE_PATH=$PROJ_MAIN_DIR/$MODULE_NAME
 
-echo BASEPATH: $BASEPATH
-echo BASEDIR: $BASEDIR
+echo SCRIPT_PATH: $SCRIPT_PATH
 echo PROJ_MAIN_DIR: $PROJ_MAIN_DIR
-
-echo Dir before Push: "$PWD"
-
-pushd "$PROJ_MAIN_DIR"
-echo EC: $?
-
-echo Dir after Push: "$PWD"
-#PACKAGE_PATH=$PWD/$PACKAGE_ROOT
+echo MODULE_NAME: $MODULE_NAME
+echo PACKAGE_PATH: $PACKAGE_PATH
 
 export PYTHONPATH=$PYTHONPATH:$PACKAGE_PATH
+
+# Can use to overwrite pytest.ini
+# set PYTEST_ADDOPTS=""
 
 echo PYTHONPATH: "$PYTHONPATH"
 
 # Test directories are specified in Pytest.ini
 pytest --cov-report term --cov=$PACKAGE_PATH
-pytest_rcode=$?
+return_code=$?
 
-if [[ $pytest_rcode -eq  0 ]];
+if [[ $return_code -eq  0 ]];
 then
     echo "*** No Issues Found"
 else
     echo "*** Some Issues Found"
-
 fi
 
-popd
-
-exit $pytest_rcode
+exit $return_code

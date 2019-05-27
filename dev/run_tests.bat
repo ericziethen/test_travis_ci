@@ -13,16 +13,14 @@ IF "%selfWrapped%"=="" (
 
 set PROJ_MAIN_DIR=%~dp0..
 
-pushd %PROJ_MAIN_DIR%
+rem pushd %PROJ_MAIN_DIR%
 
 set PACKAGE_ROOT=eric
 
 set PYTHONPATH=%PYTHONPATH%;%PACKAGE_ROOT%
 
-rem Test directories are specified in Pytest.ini
-
 rem Can use to overwrite pytest.ini
-set PYTEST_ADDOPTS="-m test4"
+rem set PYTEST_ADDOPTS=""
 
 pytest --cov-report term --cov=%PACKAGE_ROOT%
 set return_code=%errorlevel%
@@ -42,11 +40,9 @@ rem http://blog.thedigitalcatonline.com/blog/2018/07/05/useful-pytest-command-li
 rem https://www.patricksoftwareblog.com/python-unit-testing-structuring-your-project/
 
 :exit_error
-popd
 endlocal
 exit /B 1
 
 :exit_ok
-popd
 endlocal
 exit /B 0

@@ -29,7 +29,7 @@ script:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests.bat; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; 
     then
-    echo PWD: "$PWD";
+    echo PWD - "$PWD";
     ls;
     echo TRAVIS_BUILD_DIR "$TRAVIS_BUILD_DIR";
     ./dev/run_tests.sh;

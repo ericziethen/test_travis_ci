@@ -20,6 +20,10 @@ set PACKAGE_ROOT=eric
 set PYTHONPATH=%PYTHONPATH%;%PACKAGE_ROOT%
 
 rem Test directories are specified in Pytest.ini
+
+rem Can use to overwrite pytest.ini
+set PYTEST_ADDOPTS="-m test4"
+
 pytest --cov-report term --cov=%PACKAGE_ROOT%
 set return_code=%errorlevel%
 if %return_code% equ 0 (

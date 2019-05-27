@@ -12,21 +12,21 @@ matrix:
         - os: linux
           dist: xenial
           python: "3.5"
-        - os: linux
-          dist: xenial
-          python: "3.6"
-        - os: linux
-          dist: xenial
-          python: "3.7.3"
-        - os: windows
-          language: sh
-          python: "3.5"
-        - os: windows
-          language: sh
-          python: "3.6"
-        - os: windows
-          language: sh
-          python: "3.7.3"
+#        - os: linux
+#          dist: xenial
+#          python: "3.6"
+#        - os: linux
+#          dist: xenial
+#          python: "3.7.3"
+#        - os: windows
+#          language: sh
+#          python: "3.5"
+#        - os: windows
+#          language: sh
+#          python: "3.6"
+#        - os: windows
+#          language: sh
+#          python: "3.7.3"
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ];

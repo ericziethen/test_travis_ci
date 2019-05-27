@@ -5,17 +5,17 @@ cache: pip
 
 os:
   - linux
-  - windows
 
-#branches:
-#  only:
-#  - master
+branches:
+  only:
+  - master
+
+python:
+  - 3.7
 
 before_install:
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then
-      choco install python3
-      export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
-    fi
+  - echo $TRAVIS_OS_NAME
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install python3; export PATH="/c/Python37:/c/Python37/Scripts:$PATH"; fi
   - python -m pip install --upgrade pip
 
 install:
@@ -23,12 +23,8 @@ install:
     - pip install -r Requirements/requirements-dev-local.txt
 
 script:
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then
-      dev/run_tests.bat
-    fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-      ./dev/run_tests.sh
-    fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests.bat; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_tests.sh; fi
 
 after_success:
   - codecov

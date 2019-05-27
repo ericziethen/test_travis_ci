@@ -3,6 +3,8 @@
 BASEPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 BASEDIR=$(dirname "$0")
 PROJ_MAIN_DIR=$BASEPATH/..
+PACKAGE_ROOT=eric
+PACKAGE_PATH=$PROJ_MAIN_DIR/$PACKAGE_ROOT
 
 echo BASEPATH: $BASEPATH
 echo BASEDIR: $BASEDIR
@@ -15,14 +17,13 @@ echo EC: $?
 
 echo Dir after Push: "$PWD"
 
-PACKAGE_ROOT=eric
 
-export PYTHONPATH=${PYTHONPATH:+${PYTHONPATH}:}$PACKAGE_ROOT
+export PYTHONPATH=${PYTHONPATH:+${PYTHONPATH}:}$PACKAGE_PATH
 
 echo PYTHONPATH: "$PYTHONPATH"
 
 # Test directories are specified in Pytest.ini
-pytest --cov-report term --cov=$PACKAGE_ROOT
+pytest --cov-report term --cov=$PACKAGE_PATH
 pytest_rcode=$?
 
 if [[ $pytest_rcode -eq  0 ]];

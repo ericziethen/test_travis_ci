@@ -1,7 +1,7 @@
 
 language: python
 
-#cache: pip
+cache: pip
 
 #os:
 #  - linux
@@ -25,10 +25,10 @@ matrix:
                 - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
 
 before_install:
-  - python -m pip install --upgrade pip --user
+  - python -m pip install --upgrade pip
 
 install:
-    - pip install --upgrade pip setuptools 
+    - pip install --upgrade pip setuptools --user
     - pip install -r Requirements/requirements-dev-local.txt
 
 script:

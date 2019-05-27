@@ -16,6 +16,7 @@ def another_untested_function():
 
 
 def yet_another_untested_function():
+    """Another comment."""
     for x in range(100):
         print('Test me Please')
     return 'I\'m not tested as well'

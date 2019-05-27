@@ -4,8 +4,8 @@
 ##### START OF FUNCTION DEFINITIONS #####
 #########################################
 run_linter () {
-    local linter_name = $1
-    local linter_script = $2
+    local linter_name=$1
+    local linter_script=$2
 
     echo "### LINTER START - '$linter_script' ###"
     $linter_script

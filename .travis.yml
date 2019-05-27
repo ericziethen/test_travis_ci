@@ -1,8 +1,11 @@
 
 language: python
 
-cache: pip
-
+#cache: pip
+cache:
+  directories:
+    - $HOME/.cache/pip
+  
 branches:
   only:
   - master

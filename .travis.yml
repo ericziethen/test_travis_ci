@@ -1,32 +1,37 @@
 
 language: python
 
-#cache: pip
+cache: pip
 
-cache:
-  directories:
-    - $HOME/.cache/pip
-  
+os:
+  - linux
+  - windows
+
 branches:
   only:
   - master
 
-matrix:
-  include:
-    - os: windows
-      language: sh
-      python: "3.7"
-      before_install:
-        - choco install python3
-        - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
-        - python -m pip install --upgrade pip
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "windows" ];
+    then
+        choco install python3
+        export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
+    fi
+  - python -m pip install --upgrade pip
 
 install:
     - pip install --upgrade pip setuptools
-    - pip install  -r Requirements/requirements-dev-local.txt
+    - pip install -r Requirements/requirements-dev-local.txt
 
 script:
-  - dev/run_tests.bat
+  - if [ "$TRAVIS_OS_NAME" = "windows" ];
+    then
+        dev/run_tests.bat
+    fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ];
+    then
+        ./dev/run_tests.sh
+    fi
 
 after_success:
   - codecov

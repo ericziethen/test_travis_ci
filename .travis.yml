@@ -42,13 +42,18 @@ install:
     - pip install -r Requirements/requirements-dev-local.txt
 
 script:
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests.bat; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; 
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]
+    then 
+      dev/run_tests.bat;
+      dev/run_linters.bat;
+    fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]
     then
       echo PWD - "$PWD";
       ls;
       echo TRAVIS_BUILD_DIR "$TRAVIS_BUILD_DIR";
       ./dev/run_tests.sh;
+      dev/run_linters.sh;
     fi
 
 after_success:

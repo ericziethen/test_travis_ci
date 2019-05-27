@@ -3,9 +3,9 @@ language: python
 
 cache: pip
 
-os:
-  - linux
-  - windows
+#os:
+#  - linux
+#  - windows
 
 branches:
   only:

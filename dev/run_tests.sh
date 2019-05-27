@@ -1,8 +1,10 @@
 #!/bin/bash
 
+BASEPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 BASEDIR=$(dirname "$0")
-PROJ_MAIN_DIR=$BASEDIR/..
+PROJ_MAIN_DIR=$BASEPATH/..
 
+echo BASEPATH: $BASEPATH
 echo BASEDIR: $BASEDIR
 echo PROJ_MAIN_DIR: $PROJ_MAIN_DIR
 

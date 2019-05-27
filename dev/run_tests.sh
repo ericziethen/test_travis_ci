@@ -3,11 +3,17 @@
 BASEDIR=$(dirname "$0")
 PROJ_MAIN_DIR=$BASEDIR/..
 
+echo Dir before Push: "$PWD"
+
 pushd $PROJ_MAIN_DIR
+
+echo Dir after Push: "$PWD"
 
 PACKAGE_ROOT=eric
 
 export PYTHONPATH=${PYTHONPATH:+${PYTHONPATH}:}$PACKAGE_ROOT
+
+echo PYTHONPATH: "$PYTHONPATH"
 
 # Test directories are specified in Pytest.ini
 pytest --cov-report term --cov=$PACKAGE_ROOT

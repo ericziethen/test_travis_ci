@@ -8,7 +8,8 @@ echo PROJ_MAIN_DIR: $PROJ_MAIN_DIR
 
 echo Dir before Push: "$PWD"
 
-pushd $PROJ_MAIN_DIR
+pushd "$PROJ_MAIN_DIR"
+echo EC: $?
 
 echo Dir after Push: "$PWD"
 

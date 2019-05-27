@@ -22,6 +22,7 @@ before_install:
   - python -m pip install --upgrade pip
 
 install:
+    - export PYTHONPATH=$PYTHONPATH:$(pwd)/eric
     - pip install --upgrade pip setuptools
     - pip install -r Requirements/requirements-dev-local.txt
 

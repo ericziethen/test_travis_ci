@@ -3,6 +3,9 @@
 BASEDIR=$(dirname "$0")
 PROJ_MAIN_DIR=$BASEDIR/..
 
+echo BASEDIR: $BASEDIR
+echo PROJ_MAIN_DIR: $PROJ_MAIN_DIR
+
 echo Dir before Push: "$PWD"
 
 pushd $PROJ_MAIN_DIR

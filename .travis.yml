@@ -27,10 +27,11 @@ install:
 
 script:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests.bat; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]
-    ls
-    echo TRAVIS_BUILD_DIR "$TRAVIS_BUILD_DIR"
-    then ./dev/run_tests.sh
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; 
+    then
+    ls;
+    echo TRAVIS_BUILD_DIR "$TRAVIS_BUILD_DIR";
+    then ./dev/run_tests.sh;
     fi
 
 after_success:

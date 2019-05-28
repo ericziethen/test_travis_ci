@@ -32,8 +32,10 @@ rem https://www.patricksoftwareblog.com/python-unit-testing-structuring-your-pro
 
 :exit_error
 endlocal
+echo exit /B 1
 exit /B 1
 
 :exit_ok
 endlocal
+echo exit /B 0
 exit /B 0

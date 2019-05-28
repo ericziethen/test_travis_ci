@@ -17,11 +17,10 @@ call:run_linter "Pylint"        "%LINTER_DIR%\RunPylint.bat"
 echo ### Linting finished ###
 
 if defined ERROR_FOUND (
-    call:error
+    goto error
 ) else (
-    call:end
+    goto end
 )
-
 
 : #########################################
 : ##### START OF FUNCTION DEFINITIONS #####
@@ -48,20 +47,18 @@ goto:eof
 : ##### END OF FUNCTION DEFINITIONS #####
 : #######################################
 
-
 :error
 echo !!! CHECK OUTPUT, SOME LINTING ISSUE FOUND WITH
 for %%a in (%ERROR_LIST%) do (
    echo   - %%a
 )
 
-
-popd
 endlocal
+echo exit /B 1
 exit /B 1
 
 :end
 echo !!! NO LINTING ISSUE FOUND
-popd
 endlocal
+echo exit /B 0
 exit /B 0

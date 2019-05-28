@@ -21,4 +21,5 @@ else
     echo "*** Some Issues Found"
 fi
 
+echo "exit $return_code"
 exit $return_code

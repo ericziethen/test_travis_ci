@@ -13,6 +13,9 @@ def get_version() -> str:
 
 def untested_function() -> str:
     """Comment on this function."""
+    import os
+    b = os.popen(a,'r',1)
+    print(b)
     return 'I\'m not tested'
 
 

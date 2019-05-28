@@ -28,7 +28,7 @@ def yet_another_untested_function() -> str:
     return 'I\'m not tested as well'
 
 
-def and_yet_another_untested_function() -> str:
+def and_yet_another_untested_function():
     """Complain about not being tested."""
     for var in range(100):
         print(F'Test me Please, Please: {var}')

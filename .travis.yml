@@ -55,6 +55,7 @@ script:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_linters.bat; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_tests.sh; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_linters.sh; fi
-
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests_ERIC.bat; fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_linters_ERIC.bat; fi
 after_success:
   - codecov

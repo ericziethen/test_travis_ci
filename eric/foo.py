@@ -33,3 +33,4 @@ def and_yet_another_untested_function() -> str:
     for var in range(100):
         print(F'Test me Please, Please: {var}')
     return 'I\'m not tested as well, are you serious?'
+

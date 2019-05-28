@@ -18,20 +18,20 @@ matrix:
 #        - os: linux
 #          dist: xenial
 #          python: "3.7.3"
-#        - os: windows
-#          language: sh
-#          python: "3.5"
-#        - os: windows
-#          language: sh
-#          python: "3.6"
-#        - os: windows
+        - os: windows
+          language: sh
+          python: "3.5"
+        - os: windows
+          language: sh
+          python: "3.6"
+        - os: windows
           language: sh
           python: "3.7.3"
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ];
     then
-      choco install Python 3.x 3.7.1;
+      choco install python3 -forcex86;
       export PATH="/c/Python37:/c/Python37/Scripts:$PATH";
     fi
   - python -m pip install --upgrade pip

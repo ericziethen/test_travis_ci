@@ -13,9 +13,6 @@ def get_version() -> str:
 
 def untested_function() -> str:
     """Comment on this function."""
-    import os
-    b = os.popen(a,'r',1)
-    print(b)
     return 'I\'m not tested'
 
 
@@ -31,9 +28,8 @@ def yet_another_untested_function() -> str:
     return 'I\'m not tested as well'
 
 
-def and_yet_another_untested_function():
+def and_yet_another_untested_function() -> str:
     """Complain about not being tested."""
     for var in range(100):
         print(F'Test me Please, Please: {var}')
     return 'I\'m not tested as well, are you serious?'
-

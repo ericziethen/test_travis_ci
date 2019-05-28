@@ -18,9 +18,18 @@ matrix:
 #    - os: linux
 #      dist: xenial
 #      python: "3.7.3"
-#    - os: windows
-#      language: sh
-#      python: "3.5"
+    - os: windows
+      language: sh
+      python: "3.5 (x32)"
+      before_install:
+        - choco install python --version=3.5.4 --x86
+        - export PATH="/c/Python35x32:/c/Python35x32/Scripts:$PATH
+    - os: windows
+      language: sh
+      python: "3.5 (x64)"
+      before_install:
+        - choco install python --version=3.5.4
+        - export PATH="/c/Python35:/c/Python35/Scripts:$PATH
 #    - os: windows
 #      language: sh
 #      python: "3.6"

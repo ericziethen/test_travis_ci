@@ -16,7 +16,7 @@ run_linter () {
         echo "   No Issues"
     else
         echo "   Issues Found"
-        ERROR_FOUND=true
+        ERROR_FOUND="true"
         ERROR_LIST+=" $linter_name"
     fi
     echo "### LINTER END - '$linter_script' ###"
@@ -31,7 +31,7 @@ LINTER_DIR=$SCRIPT_PATH/Linting
 echo SCRIPT_PATH: $SCRIPT_PATH
 echo LINTER_DIR: $LINTER_DIR
 
-ERROR_FOUND=false
+ERROR_FOUND="false"
 ERROR_LIST=''
 
 echo "### Start Linting ###"
@@ -42,9 +42,10 @@ run_linter "Pydocstyle"    "%LINTER_DIR%\RunPydocstyle.bat"
 run_linter "Pylint"        "%LINTER_DIR%\RunPylint.bat"
 echo "### Linting finished ###"
 
-if [ "$ERROR_FOUND" = true ];
+if [ $ERROR_FOUND == "true" ];
 then
     echo "!!! NO LINTING ISSUE FOUND"
+    echo "exit 0"
     exit 0
 else
     echo "!!! CHECK OUTPUT, SOME LINTING ISSUE FOUND WITH"
@@ -52,5 +53,6 @@ else
     do
         echo "  - %%value"
     done
+    echo "exit 1"
     exit 1
 fi

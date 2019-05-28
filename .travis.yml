@@ -53,9 +53,9 @@ matrix:
 
 install:
   - python --version --version
-  - python -m pip install --upgrade pip
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then pip install --upgrade pip setuptools --user; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip install --upgrade pip setuptools; fi
+  - python -m pip install --upgrade pip setuptools wheel
+  #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then pip install --upgrade pip setuptools --user; fi
+  #- if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip install --upgrade pip setuptools; fi
   - pip install -r Requirements/requirements-dev-local.txt
 
 script:

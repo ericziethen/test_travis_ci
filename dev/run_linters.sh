@@ -35,11 +35,11 @@ ERROR_FOUND="false"
 ERROR_LIST=''
 
 echo "### Start Linting ###"
-run_linter "Bandit"        "%LINTER_DIR%\RunBandit.sh"
-run_linter "MyPy"          "%LINTER_DIR%\RunMyPy.sh"
-run_linter "Pycodestyle"   "%LINTER_DIR%\RunPycodestyle.sh"
-run_linter "Pydocstyle"    "%LINTER_DIR%\RunPydocstyle.sh"
-run_linter "Pylint"        "%LINTER_DIR%\RunPylint.sh"
+run_linter "Bandit"        "./$LINTER_DIR/RunBandit.sh"
+run_linter "MyPy"          "./$LINTER_DIR/RunMyPy.sh"
+run_linter "Pycodestyle"   "./$LINTER_DIR/RunPycodestyle.sh"
+run_linter "Pydocstyle"    "./$LINTER_DIR/RunPydocstyle.sh"
+run_linter "Pylint"        "./$LINTER_DIR/RunPylint.sh"
 echo "### Linting finished ###"
 
 echo "ERROR_FOUND: '$ERROR_FOUND'"
@@ -52,7 +52,7 @@ else
     echo "!!! CHECK OUTPUT, SOME LINTING ISSUE FOUND WITH"
     for value in $ERROR_LIST
     do
-        echo "  - %%value"
+        echo "  - $value"
     done
     echo "exit 1"
     exit 1

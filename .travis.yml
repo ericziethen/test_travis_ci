@@ -8,25 +8,25 @@ branches:
   - master
 
 matrix:
-    include:
-#        - os: linux
-#          dist: xenial
-#          python: "3.5"
-#        - os: linux
-#          dist: xenial
-#          python: "3.6"
-#        - os: linux
-#          dist: xenial
-#          python: "3.7.3"
-        - os: windows
-          language: sh
-          python: "3.5"
-        - os: windows
-          language: sh
-          python: "3.6"
-        - os: windows
-          language: sh
-          python: "3.7.3"
+  include:
+    - os: linux
+      dist: xenial
+      python: "3.5"
+    - os: linux
+      dist: xenial
+      python: "3.6"
+    - os: linux
+      dist: xenial
+      python: "3.7.3"
+    - os: windows
+      language: sh
+      python: "3.5"
+    - os: windows
+      language: sh
+      python: "3.6"
+    - os: windows
+      language: sh
+      python: "3.7.3"
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ];
@@ -34,12 +34,14 @@ before_install:
       choco install python3;
       export PATH="/c/Python37:/c/Python37/Scripts:$PATH";
     fi
-  - python -m pip install --upgrade pip
 
 install:
-    - if [ "$TRAVIS_OS_NAME" = "windows" ]; then pip install --upgrade pip setuptools --user; fi
-    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip install --upgrade pip setuptools; fi
-    - pip install -r Requirements/requirements-dev-local.txt
+  - echo "Python Version"
+  - python --version --version
+  - python -m pip install --upgrade pip
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then pip install --upgrade pip setuptools --user; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip install --upgrade pip setuptools; fi
+  - pip install -r Requirements/requirements-dev-local.txt
 
 script:
   - if [ "$TRAVIS_OS_NAME" = "windows" ];

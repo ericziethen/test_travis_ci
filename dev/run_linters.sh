@@ -42,6 +42,7 @@ run_linter "Pydocstyle"    "%LINTER_DIR%\RunPydocstyle.bat"
 run_linter "Pylint"        "%LINTER_DIR%\RunPylint.bat"
 echo "### Linting finished ###"
 
+echo "ERROR_FOUND: '$ERROR_FOUND'"
 if [ $ERROR_FOUND == "true" ];
 then
     echo "!!! NO LINTING ISSUE FOUND"

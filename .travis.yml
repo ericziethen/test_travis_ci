@@ -40,16 +40,16 @@ matrix:
 #      python: "3.6.8 (x64)"
 #      before_install: choco install python --version=3.6.8
 #      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
-    - os: windows
-      language: sh
-      python: "3.7.3 (x32)"
-      before_install: choco install python --version=3.7.3 --x86
-      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-    - os: windows
-      language: sh
-      python: "3.7.3 (x64)"
-      before_install: choco install python --version=3.7.3
-      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+#    - os: windows
+#      language: sh
+#      python: "3.7.3 (x32)"
+#      before_install: choco install python --version=3.7.3 --x86
+#      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+#    - os: windows
+#      language: sh
+#      python: "3.7.3 (x64)"
+#      before_install: choco install python --version=3.7.3
+#      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 
 install:
   - python --version --version

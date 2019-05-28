@@ -31,7 +31,7 @@ matrix:
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ];
     then
-      choco install python --version=3.5;
+      choco install python --version=3.5.4;
       export PATH="/c/Python37:/c/Python37/Scripts:$PATH";
     fi
 

@@ -6,7 +6,7 @@ from eric import foo
 
 @pytest.mark.test1
 def test_version_var():
-    assert foo.VERSION == '1.5.dev'
+    assert foo.VERSION == '1.5.dev2'
 
 
 @pytest.mark.test2

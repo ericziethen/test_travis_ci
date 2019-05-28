@@ -43,7 +43,7 @@ run_linter "Pylint"        "%LINTER_DIR%\RunPylint.sh"
 echo "### Linting finished ###"
 
 echo "ERROR_FOUND: '$ERROR_FOUND'"
-if [ $ERROR_FOUND == "true" ];
+if [ $ERROR_FOUND == "false" ];
 then
     echo "!!! NO LINTING ISSUE FOUND"
     echo "exit 0"

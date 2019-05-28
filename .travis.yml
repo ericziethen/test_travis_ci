@@ -22,7 +22,7 @@ matrix:
       language: sh
       python: "3.5 (x32)"
       before_install:
-        - PYTHON_HOME='/c/Python35x32'
+        - export PYTHON_HOME='/c/Python35x32'
         - choco install python --version=3.5.4 --x86
         - export PATH="$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
     - os: windows
@@ -41,8 +41,8 @@ matrix:
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ];
     then
-      choco install python --version=3.5.4 --x86;
-      export PATH="/c/Python35:/c/Python35/Scripts:$PATH";
+      choco install python --version=3.6.3 --x86;
+      export PATH="/c/Python36:/c/Python36/Scripts:$PATH";
     fi
 
 install:

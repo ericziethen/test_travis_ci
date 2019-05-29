@@ -63,5 +63,5 @@ deploy:
     condition: $TRAVIS_OS_NAME = windows
     python: "3.7.3 (x64)"
     tags: true
-    #branch: master
+    branch: master
     repo: ericziethen/test_travis_ci

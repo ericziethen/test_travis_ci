@@ -14,9 +14,9 @@ matrix:
 #    - os: linux
 #      dist: xenial
 #      python: "3.5"
-#    - os: linux
-#      dist: xenial
-#      python: "3.6"
+    - os: linux
+      dist: xenial
+      python: "3.6"
     - os: linux
       dist: xenial
       python: "3.7.3"
@@ -32,14 +32,14 @@ matrix:
 #      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
 #    - os: windows
 #      language: sh
-#      python: "3.6.8 (x32)"
-#      before_install: choco install python --version=3.6.8 --x86
-#      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
-#    - os: windows
-#      language: sh
-#      python: "3.6.8 (x64)"
-#      before_install: choco install python --version=3.6.8
-#      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+      python: "3.6.8 (x32)"
+      before_install: choco install python --version=3.6.8 --x86
+      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+    - os: windows
+      language: sh
+      python: "3.6.8 (x64)"
+      before_install: choco install python --version=3.6.8
+      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
     - os: windows
       language: sh
       python: "3.7.3 (x32)"
@@ -55,7 +55,9 @@ install:
   - python --version --version
   - python -m pip install --upgrade pip setuptools wheel
   - pip install --upgrade -r Requirements/requirements-dev-local.txt
-  - pip freeze
+
+  # Let's log some build info that might help with debugging issue
+  - pip list
 
 script:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests.bat; fi

@@ -1,4 +1,3 @@
-
 language: python
 
 cache: pip
@@ -7,63 +6,62 @@ branches:
   only:
   - master
 
-# choco supported Python Versions at https://chocolatey.org/packages/python3
-
 matrix:
   include:
-#    - os: linux
-#      dist: xenial
-#      python: "3.5"
-    - os: linux
-      dist: xenial
-      python: "3.6"
-    - os: linux
-      dist: xenial
-      python: "3.7.3"
-#    - os: windows
-#      language: sh
-#      python: "3.5.4 (x32)"
-#      before_install: choco install python --version=3.5.4 --x86
-#      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
-#    - os: windows
-#      language: sh
-#      python: "3.5.4 (x64)"
-#      before_install: choco install python --version=3.5.4
-#      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
-    - os: windows
-      language: sh
-      python: "3.6.8 (x32)"
-      before_install: choco install python --version=3.6.8 --x86
-      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
-    - os: windows
-      language: sh
-      python: "3.6.8 (x64)"
-      before_install: choco install python --version=3.6.8
-      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
-    - os: windows
-      language: sh
-      python: "3.7.3 (x32)"
-      before_install: choco install python --version=3.7.3 --x86
-      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-    - os: windows
-      language: sh
-      python: "3.7.3 (x64)"
-      before_install: choco install python --version=3.7.3
-      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+  - os: linux
+    dist: xenial
+    python: "3.6"
+  - os: linux
+    dist: xenial
+    python: "3.7.3"
+  - os: windows
+    language: sh
+    python: "3.6.8 (x32)"
+    before_install: choco install python --version=3.6.8 --x86
+    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+  - os: windows
+    language: sh
+    python: "3.6.8 (x64)"
+    before_install: choco install python --version=3.6.8
+    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+  - os: windows
+    language: sh
+    python: "3.7.3 (x32)"
+    before_install: choco install python --version=3.7.3 --x86
+    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+  - os: windows
+    language: sh
+    python: "3.7.3 (x64)"
+    before_install: choco install python --version=3.7.3
+    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 
 install:
-  - python --version --version
-  - python -m pip install --upgrade pip setuptools wheel
-  - pip install --upgrade -r Requirements/requirements-dev-local.txt
+- python --version --version
+- python -m pip install --upgrade pip setuptools wheel
+- pip install --upgrade -r Requirements/requirements-dev-local.txt
 
-  # Let's log some build info that might help with debugging issue
-  - pip list
+# Capture some information
+- pip list
 
 script:
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests.bat; fi
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_linters.bat; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_tests.sh; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_linters.sh; fi
+- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests.bat; fi
+- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_linters.bat; fi
+- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_tests.sh; fi
+- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_linters.sh; fi
 
 after_success:
-  - codecov
+- codecov
+
+deploy:
+  provider: pypi
+  user: ericziethen
+  server: https://testpypi.python.org/pypi # Remove for deployment to official PyPi repo
+  distributions: sdist bdist_wheel
+  password:
+    secure: klO6q5TqLVeYqvNQ2+chlW5wsbFMQ4BM+5Cf1rcFslysk3i9sUjH4Y4etA5pSqHiPEI2/MsUffIDmPLn5DkSO/4gT9wljUJJJWoC+W2PZMx2lnzUX70MPQ4v7Vel6Y286e1P8i10DlZe6W4Mq7RcdwO2OoYrJ5ZVZCEUiZngrOeOrESmpNGXbI1M9/osrwnGlmw6tJjMFJqSKXUMQX/WYHhwX3EXOZBzZS4s/AEx/ScY/rrtHr+E7YccvGcrG5796flFHUN3vKuWP0NBqZrMrY4rJRSpnWNENjre4U8jvDb74vYfFQvU09wYuuqNOI1fwj1LjyPigQ/TtS4q8aq/0m03adSLBB7E8LlyP6TjtduMhUExinEZQOuTL6AiudhEYUooDOWznhaGyQfFq9Sh59/VDGn+ew2+dXSbZ3+rV3o6KU0HkEUpd9Hvc25979geAaUuz5qVC1nnqqe2V3WehPzfzCBoZO51Rxo/A0gSaAVj9Hy6AKzFW5AQKwbtau5tbmPYNir33ipHzOpUI7xXk54rj2BJAmDzKMa35EKr5uBGh2SIgmksgjcIwFfwzmTGW5HNf9hoO/G4ILtOg85HzZ4JS7gbQM5avQqFOIIyl29v+XuFi18gH4haMRMEamP3sjGnBFMXfBaveBSnGcH6XfsiyQQiy6nklRifxkwGxXk=
+  on:
+    os: windows
+    python: "3.7.3 (x64)"
+    tags: true
+    branch: master
+    repo: ericziethen/test_travis_ci

@@ -15,6 +15,7 @@ matrix:
   - os: linux
     dist: xenial
     python: "3.7.3"
+    env: DEPLOY_ENABLED=True
   - os: windows
     language: sh
     python: "3.6.8 (x32)"
@@ -29,9 +30,7 @@ matrix:
     language: sh
     python: "3.7.3 (x32)"
     before_install: choco install python --version=3.7.3 --x86
-    env:
-      - PATH=/c/Python37:/c/Python37/Scripts:$PATH
-      - DEPLOY_ENABLED=True
+    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
   - os: windows
     language: sh
     python: "3.7.3 (x64)"
@@ -55,6 +54,15 @@ script:
 after_success:
 - codecov
 
+###
+### !!! DEPLOY MIGHT NOT BE WORKING ON WINDOWS YET
+### https://github.com/avast/yaramod/issues/19
+      # Travis should now support Windows CI environment but it's still in early access. There are multiple issues currently, some small, some bigger:
+      #   The biggest issue right now is that secrets cannot be used because they just randomly bring down VM. This is discussed here.
+      #   PyPI provider is not working on Windows. I have reported this issue however this is not blocker because it can be easily done using script provider and custom script which just sets up .pypirc, installs twine, runs sdist/bdist_wheel and twine upload.
+###
+### Either Deploy from Linux or Use manual Process in Script (but without secret still not safe)
+###
 deploy:
   skip_cleanup: true
   provider: pypi
@@ -68,5 +76,7 @@ deploy:
     #condition: $TRAVIS_OS_NAME = windows
     #python: "3.7.3 (x64)"
     tags: true
-    branch: master
+    condition: "$TRAVIS_TAG =~ ^v.*$"
+    #branch: master
+    all_branches: true
     repo: ericziethen/test_travis_ci

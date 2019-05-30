@@ -55,9 +55,9 @@ after_success:
 - codecov
 
 # Check the Deployment Conditions
-- echo "TRAVIS_BRANCH: $TRAVIS_BRANCH"
-- echo "DEPLOY_ENABLED: $DEPLOY_ENABLED"
-- echo "TRAVIS_TAG: $TRAVIS_TAG"
+- echo "TRAVIS_BRANCH $TRAVIS_BRANCH"
+- echo "DEPLOY_ENABLED $DEPLOY_ENABLED"
+- echo "TRAVIS_TAG $TRAVIS_TAG"
 
 ###
 ### !!! DEPLOY MIGHT NOT BE WORKING ON WINDOWS YET

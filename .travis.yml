@@ -69,6 +69,7 @@ after_success:
 ###
 ### Either Deploy from Linux or Use manual Process in Script (but without secret still not safe)
 ###
+### Create Releases Token: https://docs.travis-ci.com/user/deployment/releases/
 deploy:
   - provider: pypi
     skip_cleanup: true

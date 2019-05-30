@@ -64,6 +64,10 @@ after_success:
 ### Either Deploy from Linux or Use manual Process in Script (but without secret still not safe)
 ###
 deploy:
+#- echo "@@@ Start Deployment @@@"
+- echo "TRAVIS_BRANCH: $TRAVIS_BRANCH"
+- echo "DEPLOY_ENABLED: $DEPLOY_ENABLED"
+- echo "TRAVIS_TAG: $TRAVIS_TAG"
   skip_cleanup: true
   provider: pypi
   user: ericziethen

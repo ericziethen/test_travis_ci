@@ -88,6 +88,10 @@ deploy:
       branch: master
       repo: ericziethen/test_travis_ci
   # THIS IS NOT WRKING YET
+  # https://github.com/travis-ci/dpl/blob/master/lib/dpl/provider/pypi.rb
+  #    def push_app
+  #     ...
+  #     context.shell "rm -rf dist/*"
   - provider: releases
     skip_cleanup: true
     api_key:

@@ -15,7 +15,7 @@ matrix:
   - os: linux
     dist: xenial
     python: "3.7.3"
-    env: DEPLOY_ENABLED="True"
+    env: DEPLOY_ENABLED=True
 #  - os: windows
 #    language: sh
 #    python: "3.6.8 (x32)"
@@ -54,6 +54,11 @@ script:
 after_success:
 - codecov
 
+# Check the Deployment Conditions
+- echo "TRAVIS_BRANCH: $TRAVIS_BRANCH"
+- echo "DEPLOY_ENABLED: $DEPLOY_ENABLED"
+- echo "TRAVIS_TAG: $TRAVIS_TAG"
+
 ###
 ### !!! DEPLOY MIGHT NOT BE WORKING ON WINDOWS YET
 ### https://github.com/avast/yaramod/issues/19
@@ -64,10 +69,6 @@ after_success:
 ### Either Deploy from Linux or Use manual Process in Script (but without secret still not safe)
 ###
 deploy:
-#- echo "@@@ Start Deployment @@@"
-- echo "TRAVIS_BRANCH: $TRAVIS_BRANCH"
-- echo "DEPLOY_ENABLED: $DEPLOY_ENABLED"
-- echo "TRAVIS_TAG: $TRAVIS_TAG"
   skip_cleanup: true
   provider: pypi
   user: ericziethen

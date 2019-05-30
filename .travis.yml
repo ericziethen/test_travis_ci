@@ -21,21 +21,21 @@ matrix:
     dist: xenial
     python: "3.7.3"
     env: DEPLOY_ENABLED=True
-  - os: windows
-    language: sh
-    python: "3.6.8 (x32)"
-    before_install: choco install python --version=3.6.8 --x86
-    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
-  - os: windows
-    language: sh
-    python: "3.6.8 (x64)"
-    before_install: choco install python --version=3.6.8
-    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
-  - os: windows
-    language: sh
-    python: "3.7.3 (x32)"
-    before_install: choco install python --version=3.7.3 --x86
-    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+#  - os: windows
+#    language: sh
+#    python: "3.6.8 (x32)"
+#    before_install: choco install python --version=3.6.8 --x86
+#    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+#  - os: windows
+#    language: sh
+#    python: "3.6.8 (x64)"
+#    before_install: choco install python --version=3.6.8
+#    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+#  - os: windows
+#    language: sh
+#    python: "3.7.3 (x32)"
+#    before_install: choco install python --version=3.7.3 --x86
+#    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
   - os: windows
     language: sh
     python: "3.7.3 (x64)"
@@ -101,5 +101,5 @@ deploy:
       repo: ericziethen/test_travis_ci
 
 after_deploy:
-  - ls dist
   - ls
+  - ls -lR

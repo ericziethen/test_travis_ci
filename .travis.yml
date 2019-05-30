@@ -14,6 +14,13 @@ branches:
 
 matrix:
   include:
+  - os: linux
+    dist: xenial
+    python: "3.6"
+  - os: linux
+    dist: xenial
+    python: "3.7.3"
+    env: DEPLOY_ENABLED=True
   - os: windows
     language: sh
     python: "3.6.8 (x32)"
@@ -34,13 +41,6 @@ matrix:
     python: "3.7.3 (x64)"
     before_install: choco install python --version=3.7.3
     env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-  - os: linux
-    dist: xenial
-    python: "3.6"
-  - os: linux
-    dist: xenial
-    python: "3.7.3"
-    env: DEPLOY_ENABLED=True
 
 install:
 - python --version --version
@@ -87,14 +87,19 @@ deploy:
       tags: true
       branch: master
       repo: ericziethen/test_travis_ci
+  # THIS IS NOT WRKING YET
   - provider: releases
+    skip_cleanup: true
     api_key:
       secure: Ud1AgcWunf3F9fFGLI5loLQrJMxdh28u56ghAd2Xs00qASjBIoqn6GTl9QDwsAAB42l+TZMSorGitsCgF9R54jeHzuH360JYzPnDfagsVUHJ1TS5N9TP33tXx7aIdeV/1THCkkcj7FQyYNH2Kx8+r5I4trj2wcv8NZIQIfRuBw8SWbkGE6eqdwz7Bcp8sSVn8HtzQ5qlJKEGeWB7F1y/E+wcxxIsTcJ/dhfg2gG11FeOyq0g37OPRdh0QC2q1YMx4CTG2BA0Dkxbx393eI4we1jT5evLSIRg7g4M4+tpYEK+CbKmIwfM6kgWZRPnYVoORKDFnBDQNDN3xN9CV/0TJH0sXnFja4zA70VyG0WTv0sIJ6TTgAlp6bxfxcr8lMAH0SMZOablKIPbbKCKL5E2oLo2LeDqcM6x4sxJSd4cHjN9MDgSGJEwfWxwEwqBjBTKDA/iwrufocWOeemYJBEUEPq4QHBPGfUwXHqN5G5OTIxOQASrn7bd4uGPT+nX+4dbMMU/iLNa6Uw9ANkJN62fhCRxiaq+PMYucMjd2dKZjxnR7uQZ3Uq9RXfH8DAIh7bGMB2XI32nIcVWmTtlQdsemT2nLgiMTorjojuKiG9h+6y8BIjFiERguW2sbYOCCgOFTnwEagZPN1Fzbj/en1cyvow3ZgO8Dy/U1O6IEl4hjmY=
     file_glob: true
-    file: dist/*.whl
-    skip_cleanup: true
+    file: "dist/*.whl"
     on:
       condition: $DEPLOY_ENABLED = "True" && "$TRAVIS_TAG =~ ^v.*$"
       tags: true
       branch: master
       repo: ericziethen/test_travis_ci
+
+after_deploy:
+  - ls dist
+  - ls

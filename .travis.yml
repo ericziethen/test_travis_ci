@@ -12,6 +12,11 @@ branches:
   - master      # Build if the branch is the master branch
   - /^v.*$/     # Support building Tags commits on any branch (starting with 'v' in this case).
 
+extra:
+  container:
+    # extended-base generates en_US.UTF-8 locale and sets LC_ALL, LANG properly
+    extended-base: True
+
 matrix:
   include:
   - os: linux

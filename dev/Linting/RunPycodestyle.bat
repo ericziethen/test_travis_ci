@@ -3,7 +3,7 @@
 setlocal
 
 set BATCH_DIR=%~dp0
-set PROJ_MAIN_DIR=%~dp0..\..
+set PROJ_MAIN_DIR=%BATCH_DIR%..\..
 set MODULE_PATH=%PROJ_MAIN_DIR%\eric
 
 pycodestyle "%MODULE_PATH%"

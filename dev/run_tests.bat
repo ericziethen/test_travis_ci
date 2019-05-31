@@ -3,9 +3,6 @@
 setlocal
 
 set PROJ_MAIN_DIR=%~dp0..
-
-rem pushd %PROJ_MAIN_DIR%
-
 set PACKAGE_ROOT=eric
 
 set PYTHONPATH=%PYTHONPATH%;%PACKAGE_ROOT%
@@ -13,7 +10,7 @@ set PYTHONPATH=%PYTHONPATH%;%PACKAGE_ROOT%
 rem Can use to overwrite pytest.ini
 rem set PYTEST_ADDOPTS=""
 
-pytest --cov-report term --cov=%PACKAGE_ROOT%
+pytest --rootdir="%PROJ_MAIN_DIR%" --cov="%PACKAGE_ROOT%"
 set return_code=%errorlevel%
 if %return_code% equ 0 (
     echo *** No Issues Found

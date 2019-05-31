@@ -7,10 +7,10 @@ cache: pip
 # https://docs.travis-ci.com/user/build-stages/
 
 # Do we need this, the regex is duplicated in the deploy section, but without, will it get triggered on any branch push?
-#branches:
-#  only:
-#  - master
-#  - /^v.*$/     # Tags need to start with 'v' to be recognized for deployment
+branches:
+  only:
+  - master
+  - /^v.*$/     # Tags need to start with 'v' to be recognized for deployment
 
 matrix:
   include:

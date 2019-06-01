@@ -51,7 +51,9 @@ matrix:
 install:
 - python --version --version
 - python -m pip install --upgrade pip setuptools wheel
-- pip install --upgrade -r Requirements/requirements-dev-local.txt
+# don't use the '--upgrade' to not upgrade pinned requirements with generic ones
+- pip install -r Requirements/requirements-dev-for-release.txt
+- pip install -r Requirements/requirements-dev-local.txt
 
 # Capture some information
 - pip list

@@ -2,15 +2,11 @@ language: python
 
 cache: pip
 
-# TODO
-# Create athe Same Travis with Build Stages, so only deploy if build ok on all jobs
-# https://docs.travis-ci.com/user/build-stages/
-
-# Do we need this, the regex is duplicated in the deploy section, but without, will it get triggered on any branch push?
 branches:
   only:
   - master
   - /^v.*$/     # Tags need to start with 'v' to be recognized for deployment
+  - test-stages
 
 matrix:
   include:
@@ -22,25 +18,6 @@ matrix:
     os: linux
     dist: xenial
     python: "3.7.3"
-    env: DEPLOY_ENABLED=True
-#  - name: "Windows, Python 3.6.8 (x32)"
-#    os: windows
-#    language: sh
-#    python: "3.6.8"
-#    before_install: choco install python --version=3.6.8 --x86
-#    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
-#  - name: "Windows, Python 3.6.8 (x64)"
-#    os: windows
-#    language: sh
-#    python: "3.6.8"
-#    before_install: choco install python --version=3.6.8
-#    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
-#  - name: "Windows, Python 3.7.3 (x32)"
-#    os: windows
-#    language: sh
-#    python: "3.7.3"
-#    before_install: choco install python --version=3.7.3 --x86
-#    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
   - name: "Windows, Python 3.7.3 (x64)"
     os: windows
     language: sh
@@ -72,46 +49,10 @@ after_success:
 - echo DEPLOY_ENABLED $DEPLOY_ENABLED
 - echo TRAVIS_TAG $TRAVIS_TAG
 
-###
-### !!! DEPLOY MIGHT NOT BE WORKING ON WINDOWS YET
-### https://github.com/avast/yaramod/issues/19
-      # Travis should now support Windows CI environment but it's still in early access. There are multiple issues currently, some small, some bigger:
-      #   The biggest issue right now is that secrets cannot be used because they just randomly bring down VM. This is discussed here.
-      #   PyPI provider is not working on Windows. I have reported this issue however this is not blocker because it can be easily done using script provider and custom script which just sets up .pypirc, installs twine, runs sdist/bdist_wheel and twine upload.
-###
-### Either Deploy from Linux or Use manual Process in Script (but without secret still not safe)
-###
-### Create Releases Token: https://docs.travis-ci.com/user/deployment/releases/
-deploy:
-  - provider: pypi
-    skip_cleanup: true
-    distributions: sdist bdist_wheel
-    server: https://test.pypi.org/legacy/ # Remove for deployment to official PyPi repo
-    user: ericziethen
-    password:
-      secure: klO6q5TqLVeYqvNQ2+chlW5wsbFMQ4BM+5Cf1rcFslysk3i9sUjH4Y4etA5pSqHiPEI2/MsUffIDmPLn5DkSO/4gT9wljUJJJWoC+W2PZMx2lnzUX70MPQ4v7Vel6Y286e1P8i10DlZe6W4Mq7RcdwO2OoYrJ5ZVZCEUiZngrOeOrESmpNGXbI1M9/osrwnGlmw6tJjMFJqSKXUMQX/WYHhwX3EXOZBzZS4s/AEx/ScY/rrtHr+E7YccvGcrG5796flFHUN3vKuWP0NBqZrMrY4rJRSpnWNENjre4U8jvDb74vYfFQvU09wYuuqNOI1fwj1LjyPigQ/TtS4q8aq/0m03adSLBB7E8LlyP6TjtduMhUExinEZQOuTL6AiudhEYUooDOWznhaGyQfFq9Sh59/VDGn+ew2+dXSbZ3+rV3o6KU0HkEUpd9Hvc25979geAaUuz5qVC1nnqqe2V3WehPzfzCBoZO51Rxo/A0gSaAVj9Hy6AKzFW5AQKwbtau5tbmPYNir33ipHzOpUI7xXk54rj2BJAmDzKMa35EKr5uBGh2SIgmksgjcIwFfwzmTGW5HNf9hoO/G4ILtOg85HzZ4JS7gbQM5avQqFOIIyl29v+XuFi18gH4haMRMEamP3sjGnBFMXfBaveBSnGcH6XfsiyQQiy6nklRifxkwGxXk=
-    on:
-      condition: $DEPLOY_ENABLED = "True" && "$TRAVIS_TAG =~ ^v.*$"
-      tags: true
-      branch: master
-      repo: ericziethen/test_travis_ci
-  # THIS IS NOT WRKING YET
-  # https://github.com/travis-ci/dpl/blob/master/lib/dpl/provider/pypi.rb
-  #    def push_app
-  #     ...
-  #     context.shell "rm -rf dist/*"
-  - provider: releases
-    skip_cleanup: true
-    api_key:
-      secure: Ud1AgcWunf3F9fFGLI5loLQrJMxdh28u56ghAd2Xs00qASjBIoqn6GTl9QDwsAAB42l+TZMSorGitsCgF9R54jeHzuH360JYzPnDfagsVUHJ1TS5N9TP33tXx7aIdeV/1THCkkcj7FQyYNH2Kx8+r5I4trj2wcv8NZIQIfRuBw8SWbkGE6eqdwz7Bcp8sSVn8HtzQ5qlJKEGeWB7F1y/E+wcxxIsTcJ/dhfg2gG11FeOyq0g37OPRdh0QC2q1YMx4CTG2BA0Dkxbx393eI4we1jT5evLSIRg7g4M4+tpYEK+CbKmIwfM6kgWZRPnYVoORKDFnBDQNDN3xN9CV/0TJH0sXnFja4zA70VyG0WTv0sIJ6TTgAlp6bxfxcr8lMAH0SMZOablKIPbbKCKL5E2oLo2LeDqcM6x4sxJSd4cHjN9MDgSGJEwfWxwEwqBjBTKDA/iwrufocWOeemYJBEUEPq4QHBPGfUwXHqN5G5OTIxOQASrn7bd4uGPT+nX+4dbMMU/iLNa6Uw9ANkJN62fhCRxiaq+PMYucMjd2dKZjxnR7uQZ3Uq9RXfH8DAIh7bGMB2XI32nIcVWmTtlQdsemT2nLgiMTorjojuKiG9h+6y8BIjFiERguW2sbYOCCgOFTnwEagZPN1Fzbj/en1cyvow3ZgO8Dy/U1O6IEl4hjmY=
-    file_glob: true
-    file: "dist/*.whl"
-    on:
-      condition: $DEPLOY_ENABLED = "True" && "$TRAVIS_TAG =~ ^v.*$"
-      tags: true
-      branch: master
-      repo: ericziethen/test_travis_ci
+jobs:
+  include:
+    - # Just some cases
+      if: $DEPLOY_ENABLED = "True"
+      stage: deploy
+      script: echo $name, $DEPLOY_ENABLED
 
-after_deploy:
-  - ls
-  - ls -lR

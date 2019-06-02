@@ -3,20 +3,37 @@
 setlocal
 
 set SCRIPT_DIR=%~dp0
+set FILE_ARG=%1
 
 pushd %SCRIPT_DIR%
 
-for /R %%I in ("*.sh") do (
-    echo # Current Permissions for "%%I"
-    git ls-files --stage "%%I"
-    git update-index --chmod=+x "%%I"
-    echo # New Permissions for "%%I"
-    git ls-files --stage "%%I"
-    echo ########################################################################
-    echo[
+if ["%FILE_ARG%"]==[] (
+    goto set_all_files
+) else (
+    goto set_one_file
 )
 
+:set_all_files
+for /R %%I in ("*.sh") do (
+    call:set_file_permission %%I"
+)
+goto end
+
+:set_one_file
+call:set_file_permission "%FILE_PATH%"
+goto end
+
+:set_file_permission
+set FILE_PATH=%1
+echo # Current Permissions for "%FILE_PATH%"
+git ls-files --stage "%FILE_PATH%"
+git update-index --chmod=+x "%FILE_PATH%"
+echo # New Permissions for "%FILE_PATH%"
+git ls-files --stage "%FILE_PATH%"
+echo ########################################################################
+echo[
+goto:eof
+
+:end
 popd
-
 endlocal
-

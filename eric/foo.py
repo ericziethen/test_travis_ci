@@ -2,6 +2,8 @@
 
 """Test Module."""  # pylint: disable=blacklisted-name
 
+from typing import Any
+
 import requests_html
 
 VERSION = '1.5.dev'
@@ -35,7 +37,9 @@ def and_yet_another_untested_function() -> str:
         print(F'Test me Please, Please: {var}')
     return 'I\'m not tested as well, are you serious?'
 
-def scrape_url(url) -> str:
+
+def scrape_url(url: str) -> Any:  # type: ignore
+    """Scrape a url."""
     session = requests_html.HTMLSession()
     resp = session.get(url, timeout=5)
     resp.html.render()

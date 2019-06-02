@@ -22,3 +22,8 @@ def test_always_true():
 @pytest.mark.test4
 def test_always_false():
     assert False is not True
+
+
+def test_scrape_url():
+    page = foo.scrape_url(R'http://127.0.0.1:8000/http://127.0.0.1:8000')
+    assert 'LOADED-Javascript Line' not in page

@@ -61,10 +61,13 @@ install:
 before_script:
 # Startup Test Server - !!! This might take a bit time, so in script we run linting first to give the startup enough time
 #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then start "python_server" "dev/run_test_server.bat"; fi
-#- if [ "$TRAVIS_OS_NAME" = "linux" ]; then "./dev/run_test_server.sh &"; fi
-- python -m http.server --directory "tests/TestServerContent" --bind localhost 8000 &
+- if [ "$TRAVIS_OS_NAME" = "linux" ]; then run_test_server_detached.sh; fi
+#- python -m http.server --directory "tests/TestServerContent" --bind localhost 8000 &
+
 - sleep 15 # Git the server some time to startup before tests are starting, we could also run the tests after Linting for a natural delay but this is ok for now
-- ping -n 4 127.0.0.1
+
+- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ping -c 4 127.0.0.1; fi
+- if [ "$TRAVIS_OS_NAME" = "windows" ]; then ping -n 4 127.0.0.1; fi
 
 script:
 # Run Tests

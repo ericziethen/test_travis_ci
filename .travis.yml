@@ -18,11 +18,11 @@ matrix:
     os: linux
     dist: xenial
     python: "3.6"
-#  - name: "Linux, Python 3.7.3"
-#    os: linux
-#    dist: xenial
-#    python: "3.7.3"
-#    env: DEPLOY_ENABLED=True
+  - name: "Linux, Python 3.7.3"
+    os: linux
+    dist: xenial
+    python: "3.7.3"
+    env: DEPLOY_ENABLED=True
 #  - name: "Windows, Python 3.6.8 (x32)"
 #    os: windows
 #    language: sh
@@ -41,12 +41,12 @@ matrix:
 #    python: "3.7.3"
 #    before_install: choco install python --version=3.7.3 --x86
 #    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-#  - name: "Windows, Python 3.7.3 (x64)"
-#    os: windows
-#    language: sh
-#    python: "3.7.3"
-#    before_install: choco install python --version=3.7.3
-#    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+  - name: "Windows, Python 3.7.3 (x64)"
+    os: windows
+    language: sh
+    python: "3.7.3"
+    before_install: choco install python --version=3.7.3
+    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 
 install:
 - python --version --version
@@ -60,8 +60,8 @@ install:
 
 before_script:
 # Startup Test Server - !!! This might take a bit time, so in script we run linting first to give the startup enough time
-- if [ "$TRAVIS_OS_NAME" = "windows" ]; then start "python_server" "dev/run_test_server_detached.bat"; fi
-- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_test_server_detached.sh; fi
+- if [ "$TRAVIS_OS_NAME" = "windows" ]; then start "python_server" "dev/run_test_server.bat detached"; fi
+- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_test_server.sh detached; fi
 
 - sleep 15 # Git the server some time to startup before tests are starting, we could also run the tests after Linting for a natural delay but this is ok for now
 

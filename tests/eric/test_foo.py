@@ -25,5 +25,5 @@ def test_always_false():
 
 
 def test_scrape_url():
-    page = foo.scrape_url(R'http://127.0.0.1:8000/http://127.0.0.1:8000')
+    page = foo.scrape_url(R'http://127.0.0.1:8000/SinglePageJS.html')
     assert 'LOADED-Javascript Line' in page

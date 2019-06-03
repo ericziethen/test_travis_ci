@@ -18,11 +18,11 @@ matrix:
     os: linux
     dist: xenial
     python: "3.6"
-  - name: "Linux, Python 3.7.3"
-    os: linux
-    dist: xenial
-    python: "3.7.3"
-    env: DEPLOY_ENABLED=True
+#  - name: "Linux, Python 3.7.3"
+#    os: linux
+#    dist: xenial
+#    python: "3.7.3"
+#    env: DEPLOY_ENABLED=True
 #  - name: "Windows, Python 3.6.8 (x32)"
 #    os: windows
 #    language: sh
@@ -41,12 +41,12 @@ matrix:
 #    python: "3.7.3"
 #    before_install: choco install python --version=3.7.3 --x86
 #    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-  - name: "Windows, Python 3.7.3 (x64)"
-    os: windows
-    language: sh
-    python: "3.7.3"
-    before_install: choco install python --version=3.7.3
-    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+#  - name: "Windows, Python 3.7.3 (x64)"
+#    os: windows
+#    language: sh
+#    python: "3.7.3"
+#    before_install: choco install python --version=3.7.3
+#    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 
 install:
 - python --version --version
@@ -64,6 +64,7 @@ before_script:
 #- if [ "$TRAVIS_OS_NAME" = "linux" ]; then "./dev/run_test_server.sh &"; fi
 - python -m http.server --directory "tests/TestServerContent" --bind localhost 8000 &
 - sleep 15 # Git the server some time to startup before tests are starting, we could also run the tests after Linting for a natural delay but this is ok for now
+- ping -n 4 127.0.0.1
 
 script:
 # Run Tests

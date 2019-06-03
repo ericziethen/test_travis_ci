@@ -26,4 +26,4 @@ def test_always_false():
 
 def test_scrape_url():
     page = foo.scrape_url(R'http://127.0.0.1:8000/http://127.0.0.1:8000')
-    assert 'LOADED-Javascript Line' not in page
+    assert 'LOADED-Javascript Line' in page

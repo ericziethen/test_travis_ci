@@ -63,9 +63,10 @@ before_script:
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then start "python_server" "dev/run_test_server.bat"; fi
 #- if [ "$TRAVIS_OS_NAME" = "linux" ]; then "./dev/run_test_server.sh &"; fi
 - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
-    ls
-    ls dev/run_test_server.sh
-    ./dev/run_test_server.sh &; fi
+    ls;
+    ls dev/run_test_server.sh;
+    ./dev/run_test_server.sh &;
+    fi
 - sleep 5 # Git the server some time to startup before tests are starting, we could also run the tests after Linting for a natural delay but this is ok for now
 
 script:

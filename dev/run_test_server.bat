@@ -2,6 +2,9 @@
 
 setlocal
 
+rem DON'T CHANGE, ALSO USED FOR KILLING
+set SERVER_WINDOW_NAME=python_test_server
+
 set PROJ_MAIN_DIR=%~dp0..
 set TEST_SERVER_DIR=%PROJ_MAIN_DIR%\tests\TestServerContent
 
@@ -23,7 +26,7 @@ if [%1] == [] (
 goto end
 
 :run_detached
-start "python_test_server" %COMMAND%
+start "%SERVER_WINDOW_NAME%" %COMMAND%
 goto end
 
 :end

@@ -81,6 +81,9 @@ script:
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/check_package_safety_bare.bat; fi
 - if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/check_package_safety.sh; fi
 
+# Kill the Test Server
+- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/kill_test_server.bat; fi
+
 after_success:
 - codecov
 

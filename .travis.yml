@@ -84,6 +84,12 @@ script:
 # Kill the Test Server
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/kill_test_server.bat; fi
 
+# Kill Python processes - Travis doesn't set the title on Windows
+- if [ "$TRAVIS_OS_NAME" = "windows" ]; then
+    echo Command: 'tasklist /V /FI "imagename eq python.exe"';
+    taskkill /F /FI "imagename eq python.exe";
+  fi
+
 after_success:
 - codecov
 

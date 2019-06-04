@@ -27,6 +27,8 @@ goto end
 
 :run_detached
 start "%SERVER_WINDOW_NAME%" %COMMAND%
+echo Command: 'tasklist /V /FI "imagename eq python.exe"'
+tasklist /V /FI "imagename eq python.exe"
 goto end
 
 :end

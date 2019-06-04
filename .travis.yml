@@ -1,6 +1,8 @@
 language: python
 
-cache: pip
+cache:
+  - pip
+  - C:\\Users\\travis\\AppData\\Local\\pyppeteer\\pyppeteer\\local-chromium
 
 # TODO
 # Create athe Same Travis with Build Stages, so only deploy if build ok on all jobs
@@ -92,7 +94,6 @@ script:
 
 
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then ls -R "C:\\Users\\travis\\AppData\\Local\\pyppeteer\\pyppeteer\\local-chromium\\575458"; fi
-- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ls -R "~/.pyppeteer"; fi
 
 
 after_success:

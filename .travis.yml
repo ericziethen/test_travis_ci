@@ -2,7 +2,8 @@ language: python
 
 cache:
   - pip
-  - C:\\Users\\travis\\AppData\\Local\\pyppeteer\\pyppeteer\\local-chromium
+    directories:
+     - C:\\Users\\travis\\AppData\\Local\\pyppeteer\\pyppeteer\\local-chromium
 
 # TODO
 # Create athe Same Travis with Build Stages, so only deploy if build ok on all jobs

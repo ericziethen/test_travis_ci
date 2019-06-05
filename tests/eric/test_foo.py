@@ -23,7 +23,7 @@ def test_always_true():
 def test_always_false():
     assert False is not True
 
-
+@pytest.mark.requests_html
 def test_scrape_url():
     page = foo.scrape_url(R'http://127.0.0.1:8000/SinglePageJS.html')
     assert 'LOADED-Javascript Line' in page

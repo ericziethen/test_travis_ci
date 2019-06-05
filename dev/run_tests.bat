@@ -7,8 +7,12 @@ set PACKAGE_ROOT=eric
 
 set PYTHONPATH=%PYTHONPATH%;%PACKAGE_ROOT%
 
-rem Can use to overwrite pytest.ini
-rem set PYTEST_ADDOPTS=""
+rem To see how to loop through multiple Command Line Arguments: https://www.robvanderwoude.com/parameters.php
+
+rem Disable Unwanted tests when run from Travis
+if "%1"=="travis-ci" (
+    set PYTEST_ADDOPTS=-m "(not requests_html)"
+)
 
 pytest --rootdir="%PROJ_MAIN_DIR%" --cov="%PACKAGE_ROOT%"
 set return_code=%errorlevel%

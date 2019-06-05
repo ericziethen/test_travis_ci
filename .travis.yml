@@ -1,9 +1,6 @@
 language: python
 
-cache:
-  - pip
-    directories:
-     - C:\\Users\\travis\\AppData\\Local\\pyppeteer\\pyppeteer\\local-chromium
+cache: pip
 
 # TODO
 # Create athe Same Travis with Build Stages, so only deploy if build ok on all jobs
@@ -90,11 +87,6 @@ script:
 # Kill Python processes - Travis doesn't set the title on Windows
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then tasklist //fi "imagename eq python.exe"; fi
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then taskkill //im python.exe //f; fi
-#- if [ "$TRAVIS_OS_NAME" = "windows" ]; then tasklist //V; fi
-#- if [ "$TRAVIS_OS_NAME" = "windows" ]; then tasklist //fi "imagename eq python.exe"; fi
-
-
-- if [ "$TRAVIS_OS_NAME" = "windows" ]; then ls -R "C:\\Users\\travis\\AppData\\Local\\pyppeteer\\pyppeteer\\local-chromium\\575458"; fi
 
 
 after_success:

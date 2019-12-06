@@ -10,6 +10,7 @@ cache: pip
 branches:
   only:
   - master
+  - development
   - /^v.*$/     # Tags need to start with 'v' to be recognized for deployment
 
 matrix:

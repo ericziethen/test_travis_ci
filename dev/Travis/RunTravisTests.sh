@@ -13,6 +13,3 @@ else
     echo "No Merging Issue"
     exit 0
 fi
-
-
-

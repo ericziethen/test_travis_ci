@@ -44,13 +44,19 @@ matrix:
 #    before_install: choco install python --version=3.7.3 --x86
 #    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 #  - name: "Windows, Python 3.7.3 (x64)"
-#    os: windows
-#    language: sh
-#    python: "3.7.3"
+    os: windows
+    language: sh
+    python: "3.7.3"
 #    before_install: choco install python --version=3.7.3
-#    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+
 
 install:
+
+# Check if the Merge Operation is allowed
+- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/Travis/RunTravisTests.bat; fi
+- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/Travis/RunTravisTests.sh; fi
+
 - python --version --version
 - python -m pip install --upgrade pip setuptools wheel
 # don't use the '--upgrade' to not upgrade pinned requirements with generic ones
@@ -59,9 +65,6 @@ install:
 
 # Capture some information
 - pip list
-
-before_install:
-- echo Main Section - before_install 
 
 before_script:
 # Startup Test Server - !!! This might take a bit time, so in script we run linting first to give the startup enough time
@@ -74,10 +77,6 @@ before_script:
 #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then ping -n 4 127.0.0.1; fi
 
 script:
-- export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-- echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
-
-
 # Run Tests
 #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests.bat travis-ci; fi
 #- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_tests.sh; fi

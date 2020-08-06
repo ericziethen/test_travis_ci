@@ -8,7 +8,7 @@ env:
 
 cache: pip
 
-#matrix:
+matrix:
   include:
   - name: "Linux, Python 3.7 - Postgres"
     os: linux

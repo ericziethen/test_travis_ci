@@ -34,7 +34,7 @@ jobs:
       env: TEST_PYTHON=3.8
 
   allow_failures:
-      env: TEST_PYTHON=3.6
+    - if: env(TEST_PYTHON) = 3.6
 
 before_cache:
 - echo PHASE - before_cache

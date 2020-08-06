@@ -26,9 +26,9 @@ python:
 
 matrix:
   include:
-    - python: '3.8'
+    - python: '3.8 - Release'
       env: DJANGO_DB=SQLITE
-      name: 'Python 3.8 - SQLITE'
+      name: 'Python 3.8 - RELEASE'
 
 #matrix:
 #  include:

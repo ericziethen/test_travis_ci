@@ -1,27 +1,51 @@
 # https://docs.travis-ci.com/user/job-lifecycle/
 
+'''
+- Run Multiple Jobs/Matrixes with different python versions,
+  -> Matrix Defined
+- Different Databases
+  -> Env Defined
+- Tox Jobs only Responsible for Testing
+- Main Environment - Latest Django, Runs Dev Environment  
+'''
+
+
 language: python
 
 env:
-- TESTING=UNIT_TESTS
-- TESTING=INTEGRATION_TESTING
+- DJANGO_DB=SQLITE
+- DJANGO_DB=POSTGRES
 
 cache: pip
 
 matrix:
   include:
-  - name: "Linux, Python 3.7 - Postgres"
+  - name: "Linux, Python 3.6"
+    os: linux
+    dist: xenial
+    python: "3.6"
+  - name: "Linux, Python 3.7"
     os: linux
     dist: xenial
     python: "3.7"
-    env: DJANGO_DB=POSTGRES
-    install: echo PHASE Linux, Python 3.7 - Postgres - install
-  - name: "Linux, Python 3.8 - Sqlite"
+  - name: "Linux, Python 3.8"
+    os: linux
+    dist: xenial
+    python: "3.8"
+  - name: "Linux, Python 3.8 - DEVELOPMENT"
+    os: linux
+    dist: xenial
+    python: "3.8"
+  - name: "Linux, Python 3.8 - DEVELOPMENT - RELEASE"
     os: linux
     dist: xenial
     python: "3.8"
     env: DJANGO_DB=SQLITE
-    install: echo PHASE Linux, Python 3.8 - Sqlite - install
+      - RELEASE=TRUE
+
+
+
+
 
 #jobs:
 #  fast_finish: true

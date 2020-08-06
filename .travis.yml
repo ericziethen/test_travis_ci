@@ -1,10 +1,20 @@
 # https://docs.travis-ci.com/user/job-lifecycle/
 
+
+#- Run Multiple Jobs/Matrixes with different python versions,
+#  -> Matrix Defined
+#- Different Databases
+#  -> Env Defined
+#- Tox Jobs only Responsible for Testing
+#- Main Environment - Latest Django, Runs Dev Environment  
+
+
+
 language: python
 
 env:
-- TESTING=UNIT_TESTS
-- TESTING=INTEGRATION_TESTING
+- DJANGO_DB=SQLITE
+- DJANGO_DB=POSTGRES
 
 cache: pip
 

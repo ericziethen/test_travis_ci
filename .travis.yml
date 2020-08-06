@@ -18,7 +18,7 @@ env:
 
 cache: pip
 
-matrix:
+jobs:
   include:
   - name: "Linux, Python 3.6"
     os: linux

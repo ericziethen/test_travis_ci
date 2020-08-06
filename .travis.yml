@@ -9,32 +9,34 @@ env:
 cache: pip
 
 #matrix:
-#  include:
-#  - name: "Linux, Python 3.7 - Postgres"
-#    os: linux
-#    dist: xenial
-#    python: "3.7"
-#    env: DJANGO_DB=POSTGRES
-#  - name: "Linux, Python 3.8 - Sqlite"
-#    os: linux
-#    dist: xenial
-#    python: "3.8"
-#    env: DJANGO_DB=SQLITE
-
-jobs:
-  fast_finish: true
   include:
-    - python: "3.6"
-      env:
-      - TEST_PYTHON=3.6
-      - FORCE_FAIL=TRUE
-    - python: "3.7"
-      env: TEST_PYTHON=3.7
-    - python: "3.8"
-      env: TEST_PYTHON=3.8
+  - name: "Linux, Python 3.7 - Postgres"
+    os: linux
+    dist: xenial
+    python: "3.7"
+    env: DJANGO_DB=POSTGRES
+    install: echo PHASE Linux, Python 3.7 - Postgres - install
+  - name: "Linux, Python 3.8 - Sqlite"
+    os: linux
+    dist: xenial
+    python: "3.8"
+    env: DJANGO_DB=SQLITE
+    install: echo PHASE Linux, Python 3.8 - Sqlite - install
 
-  allow_failures:
-    - if: env(TEST_PYTHON) = 3.6
+#jobs:
+#  fast_finish: true
+#  include:
+#    - python: "3.6"
+#      env:
+#      - TEST_PYTHON=3.6
+#      - FORCE_FAIL=TRUE
+#    - python: "3.7"
+#      env: TEST_PYTHON=3.7
+#    - python: "3.8"
+#      env: TEST_PYTHON=3.8
+
+#  allow_failures:
+#    - if: env(TEST_PYTHON) = 3.6
 
 before_install:
 - echo PHASE - before_install

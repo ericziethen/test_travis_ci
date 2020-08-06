@@ -1,13 +1,13 @@
 # https://docs.travis-ci.com/user/job-lifecycle/
 
-'''
-- Run Multiple Jobs/Matrixes with different python versions,
-  -> Matrix Defined
-- Different Databases
-  -> Env Defined
-- Tox Jobs only Responsible for Testing
-- Main Environment - Latest Django, Runs Dev Environment  
-'''
+
+#- Run Multiple Jobs/Matrixes with different python versions,
+#  -> Matrix Defined
+#- Different Databases
+#  -> Env Defined
+#- Tox Jobs only Responsible for Testing
+#- Main Environment - Latest Django, Runs Dev Environment  
+
 
 
 language: python
@@ -41,7 +41,8 @@ matrix:
     dist: xenial
     python: "3.8"
     env: DJANGO_DB=SQLITE
-      - RELEASE=TRUE
+    before_install:
+      env: RELEASE=TRUE
 
 
 

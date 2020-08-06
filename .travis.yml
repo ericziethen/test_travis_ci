@@ -33,7 +33,7 @@ jobs:
     - python: "3.6"
       env: 
       - TEST_PYTHON=3.6
-      - - FORCE_FAIL=TRUE
+      - FORCE_FAIL=TRUE
 
 before_cache:
 - echo PHASE - before_cache

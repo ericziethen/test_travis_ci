@@ -8,20 +8,28 @@ env:
 
 cache: pip
 
-matrix:
-  include:
-  - name: "Linux, Python 3.7 - Postgres"
-    os: linux
-    dist: xenial
-    python: "3.7"
-    env: DJANGO_DB=POSTGRES
-    install: echo PHASE Linux, Python 3.7 - Postgres - install
-  - name: "Linux, Python 3.8 - Sqlite"
-    os: linux
-    dist: xenial
-    python: "3.8"
-    env: DJANGO_DB=SQLITE
-    install: echo PHASE Linux, Python 3.8 - Sqlite - install
+
+python:
+  - '3.8'
+  - '3.7'
+  - '3.6'
+
+
+
+#matrix:
+#  include:
+#  - name: "Linux, Python 3.7 - Postgres"
+#    os: linux
+#    dist: xenial
+#    python: "3.7"
+#    env: DJANGO_DB=POSTGRES
+#    install: echo PHASE Linux, Python 3.7 - Postgres - install
+#  - name: "Linux, Python 3.8 - Sqlite"
+#    os: linux
+#    dist: xenial
+#    python: "3.8"
+#    env: DJANGO_DB=SQLITE
+#    install: echo PHASE Linux, Python 3.8 - Sqlite - install
 
 #jobs:
 #  fast_finish: true

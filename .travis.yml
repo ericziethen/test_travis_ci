@@ -2,6 +2,10 @@
 
 language: python
 
+env:
+- TESTING=UNIT_TESTS
+- TESTING=INTEGRATION_TESTING
+
 cache: pip
 
 #matrix:
@@ -20,9 +24,6 @@ cache: pip
 jobs:
   fast_finish: true
   include:
-    - { python: "3.6", env: TOXFACTOR=py36 }
-    - { python: "3.7", env: TOXFACTOR=py37 }
-    - { python: "3.8", env: TOXFACTOR=py38 }
 
     - python: "3.6"
       env: TEST_PYTHON=3.6

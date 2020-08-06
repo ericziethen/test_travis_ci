@@ -36,12 +36,6 @@ jobs:
   allow_failures:
     - if: env(TEST_PYTHON) = 3.6
 
-before_cache:
-- echo PHASE - before_cache
-
-after_cache:
-- echo PHASE - after_cache
-
 before_install:
 - echo PHASE - before_install
 - printenv
@@ -49,18 +43,12 @@ before_install:
 install:
 - echo PHASE - install
 
-after_install:
-- echo PHASE - after_install
-
 before_script:
 - echo PHASE - before_script
 
 script:
 - echo PHASE - script
 - if [ "$FORCE_FAIL" = "TRUE" ]; then exit 1; fi
-
-after_script:
-- echo PHASE - after_script
 
 after_success:
 - echo PHASE - after_success

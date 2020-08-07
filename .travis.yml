@@ -26,9 +26,12 @@ python:
 
 jobs:
   include:
-    - python: '3.8'
+    - name: 'Python 3.8 - Current Dev and Release'
+      python: '3.8'
       env: DJANGO_DB=SQLITE
-      name: 'Python 3.8 - RELEASE'
+    - stage: Lint and Code Style
+      python: 3.8
+      env: TOXENV=flake8
 
 #matrix:
 #  include:

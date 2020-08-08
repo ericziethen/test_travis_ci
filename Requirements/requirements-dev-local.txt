@@ -10,6 +10,7 @@ pytest
 pytest-cov
 codecov
 safety
+tox
 
 # Profiling
 pyinstrument

@@ -31,7 +31,7 @@ jobs:
       python: '3.8'
       env: 
       - DJANGO_DB=SQLITE
-      - FORCE_FAIL=TRUE
+      #- FORCE_FAIL=TRUE
     - stage: Lint and Code Style
       python: 3.8
       env: TOXENV=flake8

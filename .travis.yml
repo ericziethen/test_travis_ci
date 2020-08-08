@@ -20,9 +20,9 @@ cache: pip
 
 
 #python:
-#  - '3.8'
-#  - '3.7'
-#  - '3.6'
+  - '3.8'
+  - '3.7'
+  - '3.6'
 
 jobs:
   include:
@@ -35,36 +35,7 @@ jobs:
     - stage: Lint and Code Style
       python: 3.8
       env: TOXENV=flake8
-
-#matrix:
-#  include:
-#  - name: "Linux, Python 3.7 - Postgres"
-#    os: linux
-#    dist: xenial
-#    python: "3.7"
-#    env: DJANGO_DB=POSTGRES
-#    install: echo PHASE Linux, Python 3.7 - Postgres - install
-#  - name: "Linux, Python 3.8 - Sqlite"
-#    os: linux
-#    dist: xenial
-#    python: "3.8"
-#    env: DJANGO_DB=SQLITE
-#    install: echo PHASE Linux, Python 3.8 - Sqlite - install
-
-#jobs:
-#  fast_finish: true
-#  include:
-#    - python: "3.6"
-#      env:
-#      - TEST_PYTHON=3.6
-#      - FORCE_FAIL=TRUE
-#    - python: "3.7"
-#      env: TEST_PYTHON=3.7
-#    - python: "3.8"
-#      env: TEST_PYTHON=3.8
-
-#  allow_failures:
-#    - if: env(TEST_PYTHON) = 3.6
+      script:
 
 before_install:
 - echo PHASE - before_install
@@ -72,6 +43,8 @@ before_install:
 
 install:
 - echo PHASE - install
+#- pip install tox-travis
+- pip install tox
 
 before_script:
 - echo PHASE - before_script
@@ -79,6 +52,8 @@ before_script:
 script:
 - echo PHASE - script
 - if [ "$FORCE_FAIL" = "TRUE" ]; then exit 1; fi
+- tox
+- pip list
 
 after_success:
 - echo PHASE - after_success

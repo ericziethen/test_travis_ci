@@ -12,24 +12,26 @@
 
 language: python
 
-env:
-- DJANGO_DB=SQLITE
-- DJANGO_DB=POSTGRES
+#env:
+#- DJANGO_DB=SQLITE
+#- DJANGO_DB=POSTGRES
 
 cache: pip
 
 
-python:
-  - '3.8'
-  - '3.7'
-  - '3.6'
+#python:
+#  - '3.8'
+#  - '3.7'
+#  - '3.6'
 
 jobs:
   include:
-    - stage: 'Testing'
-    - name: 'Python 3.8 - Current Dev and Release'
+    - stage: "Testing"
+      name: 'Python 3.8 - Current Dev and Release'
       python: '3.8'
-      env: DJANGO_DB=SQLITE
+      env: 
+      - DJANGO_DB=SQLITE
+      - FORCE_FAIL=TRUE
     - stage: Lint and Code Style
       python: 3.8
       env: TOXENV=flake8

@@ -19,7 +19,7 @@ language: python
 cache: pip
 
 
-#python:
+python:
   - '3.8'
   - '3.7'
   - '3.6'
@@ -35,7 +35,7 @@ jobs:
     - stage: Lint and Code Style
       python: 3.8
       env: TOXENV=flake8
-      #script: # Nothing to do
+      script:
 
 before_install:
 - echo PHASE - before_install

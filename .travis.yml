@@ -35,7 +35,7 @@ jobs:
     - stage: Lint and Code Style
       python: 3.8
       env: TOXENV=flake8
-      script: # Nothing to do
+      #script: # Nothing to do
 
 before_install:
 - echo PHASE - before_install

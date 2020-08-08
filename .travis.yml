@@ -26,6 +26,7 @@ python:
 
 jobs:
   include:
+    - stage: 'Testing'
     - name: 'Python 3.8 - Current Dev and Release'
       python: '3.8'
       env: DJANGO_DB=SQLITE

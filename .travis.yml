@@ -4,11 +4,11 @@ cache: pip
 #- '3.8'
 jobs:
   include:
-  #- stage: Testing
-  #  name: Python 3.8 - Current Dev and Release
-  #  python: '3.8'
+  - stage: Testing
+    name: Python 3.8 - Current Dev and Release
+    python: '3.8'
   #  env:
-  #  - DJANGO_DB=SQLITE
+  #  - FORCE_FAIL=TRUE
   - stage: Deploy
     # Only consider deployment it on correct branch with a proper formatted tag
     if: (branch = feature/tox-jobs-matrix-tryout) AND (tag =~ ^[0-9]+\\.[0-9]+\\.[0-9]+$)
@@ -30,7 +30,7 @@ before_script:
 script:
 - echo PHASE - script
 - if [ "$FORCE_FAIL" = "TRUE" ]; then exit 1; fi
-- tox
+#- tox
 after_success:
 - echo PHASE - after_success
 after_failure:

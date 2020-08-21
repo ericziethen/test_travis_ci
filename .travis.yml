@@ -44,7 +44,7 @@ deploy:
   on:
     condition: "$TRAVIS_TAG =~ ^[0-9]+\\.[0-9]+\\.[0-9]+$"
     tags: true
-    branch: feature/tox-jobs-matrix-tryout2
+    branch: feature/tox-jobs-matrix-tryout
     #all_branches: true
 
 after_deploy:

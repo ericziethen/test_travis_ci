@@ -6,7 +6,7 @@ jobs:
   include:
   - stage: Testing
     name: Python 3.8 - Current Dev and Release
-    python: '3.8'
+  #  python: '3.8'
   #  env:
   #  - FORCE_FAIL=TRUE
   - stage: Deploy
@@ -24,7 +24,7 @@ before_install:
 - printenv
 install:
 - echo PHASE - install
-- pip install tox-travis
+#- pip install tox-travis
 before_script:
 - echo PHASE - before_script
 script:

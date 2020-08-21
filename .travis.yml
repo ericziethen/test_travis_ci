@@ -39,16 +39,16 @@ jobs:
     - stage: Deploy
       script: echo PHASE - script nothing to do # No testing to do
       deploy:
-      provider: pypi
-      skip_cleanup: true
-      distributions: sdist bdist_wheel
-      server: https://test.pypi.org/legacy/ # Remove for deployment to official PyPi repo
-      user: "__token__"
-      password: "pypi-AgENdGVzdC5weXBpLm9yZwIkNGYzNzE3NjQtMDNjNS00Y2UwLWFhYzctMjA3ODkyNjU0MzRjAAI_eyJwZXJtaXNzaW9ucyI6IHsicHJvamVjdHMiOiBbInRlc3QtdHJhdmlzLWNpIl19LCAidmVyc2lvbiI6IDF9AAAGIHdxhTFZypf6HDDMPRYfUa6DG1B5iU-rUhcBXi-xNLuD"
-      on:
-        condition: $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$
-        tags: true
-        branch: feature/tox-jobs-matrix-tryout
+      - provider: pypi
+        skip_cleanup: true
+        distributions: sdist bdist_wheel
+        server: https://test.pypi.org/legacy/ # Remove for deployment to official PyPi repo
+        user: "__token__"
+        password: "pypi-AgENdGVzdC5weXBpLm9yZwIkNGYzNzE3NjQtMDNjNS00Y2UwLWFhYzctMjA3ODkyNjU0MzRjAAI_eyJwZXJtaXNzaW9ucyI6IHsicHJvamVjdHMiOiBbInRlc3QtdHJhdmlzLWNpIl19LCAidmVyc2lvbiI6IDF9AAAGIHdxhTFZypf6HDDMPRYfUa6DG1B5iU-rUhcBXi-xNLuD"
+        on:
+          condition: $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$
+          tags: true
+          branch: feature/tox-jobs-matrix-tryout
 
 before_install:
 - echo PHASE - before_install

@@ -34,7 +34,7 @@ after_failure:
 - echo PHASE - after_failure
 
 deploy:
-- echo PHASE - deploy
+- echo PHASE deploy
   provider: pypi
   skip_cleanup: true
   distributions: sdist bdist_wheel

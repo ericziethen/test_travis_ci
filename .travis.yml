@@ -11,9 +11,10 @@ jobs:
   #  - DJANGO_DB=SQLITE
   - stage: Deploy
     script: echo PHASE - script nothing to do
+    env:
+    - SETUP_CFG_VERSION="$(sed -nr 's/^version\s*=\s*([0-9]+\.[0-9]+\.[0-9]+)\s*$/\1/p' setup.cfg)"
     before_deploy:
     - echo PHASE - before_deploy
-      SETUP_CFG_VERSION="$(sed -nr 's/^version\s*=\s*([0-9]+\.[0-9]+\.[0-9]+)\s*$/\1/p' setup.cfg)"
       echo SETUP_CFG_VERSION "$SETUP_CFG_VERSION"
 
 before_install:
@@ -42,10 +43,9 @@ deploy:
   password:
     secure: ds2sytqAYPw5sl0h7hIkVo7LOpoUOfn2vFk3+arxNAS8kQ50wSJqNMtaxS/69Bozc24p0eU5Y5Zt4PZl0Y9/cHRllP6i1TIJ0Pxau14fNWbEbM4b23JXwoKgCvGPyS8Jrxl+3BrEWJ+VApFe91WN1wvMUq/Z2ia0bXktskL2WpYeqeBCVvLjk5m7duQLLkrjRxxY0Ss9VlpSczUkyNA6Qg7rlkz8OYZ9UkZWCEMx51LVQSj1vIWWR7/o8viJZo92GIHIp/lMrtNtw1rboYhsoLZJMrGA0ZEdIQccRCLts1hzj0W5GucA5SjnIyfOXjTomoDqKWdDV216PxgNmOS4VxTrEQuai/sckh25UOzcKIJynXhVaDrOh3b6+EX4MbeyRxOq7jPuviJOZM7Uk+VD+CU9rEfVocjfuDFpUJWhe+g8Hjp03HhJaGW0cr2rYMmsjmBQNe5RhGsqMxNX83mhQoBdQFhlfoN4HOKmyncPsjbB15I36RJgSCPwCdRrwCPCXD069Czqa9qzj2OcvKpEAWhMRazmRHoMu0UDKOuqt5DSjlP37ZIuqLNReAiogG0RngIYOqJ6jdxV82w13wmBlSWRqk3Ct0ZYzE8ozX5jtj03kqUYv4t29EVk9CGu5P4lCOAcs0H8yu6Cl32o3vVGyY1qMWA4+SyP74fh+Z+hHjc=
   on:
-    condition: $TRAVIS_TAG =~ ^[0-9]+\\.[0-9]+\\.[0-9]+$ && $TRAVIS_TAG =~ SETUP_CFG_VERSION
+    condition: $TRAVIS_TAG =~ "^[0-9]+\\.[0-9]+\\.[0-9]+$" && "$TRAVIS_TAG = $SETUP_CFG_VERSION"
     tags: true
     branch: feature/tox-jobs-matrix-tryout
-    #all_branches: true
 
 after_deploy:
 - echo PHASE - after_deploy

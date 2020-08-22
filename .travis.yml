@@ -1,21 +1,23 @@
 language: python
 cache: pip
 #python:
-#- '3.8'
+- '3.8'
 jobs:
   include:
   - stage: Testing
     name: Python 3.8 - Current Dev and Release
-  #  python: '3.8'
+    python: '3.8'
   #  env:
   #  - FORCE_FAIL=TRUE
   - stage: Deploy
     # Only consider deployment it on correct branch with a proper formatted tag
     #if: (branch = feature/tox-jobs-matrix-tryout)
     if: (branch = feature/tox-jobs-matrix-tryout) AND (tag =~ ^[0-9]+\\.[0-9]+\\.[0-9]+$)
-    script: echo PHASE - script nothing to do
     env:
     - SETUP_CFG_VERSION="$(sed -nr 's/^version\s*=\s*([0-9]+\.[0-9]+\.[0-9]+)\s*$/\1/p' setup.cfg)"
+    script: echo PHASE - script nothing to do
+    - printenv
+      echo SETUP_CFG_VERSION "$SETUP_CFG_VERSION"
     before_deploy:
     - echo PHASE - before_deploy
       echo SETUP_CFG_VERSION "$SETUP_CFG_VERSION"

@@ -15,8 +15,9 @@ jobs:
     if: (branch = feature/tox-jobs-matrix-tryout) AND (tag =~ ^[0-9]+\\.[0-9]+\\.[0-9]+$)
     env:
     - SETUP_CFG_VERSION="$(sed -nr 's/^version\s*=\s*([0-9]+\.[0-9]+\.[0-9]+)\s*$/\1/p' setup.cfg)"
-    script: echo PHASE - script nothing to do
-    - printenv
+    script: 
+    - echo PHASE - script nothing to do
+      printenv
       echo SETUP_CFG_VERSION "$SETUP_CFG_VERSION"
     before_deploy:
     - echo PHASE - before_deploy

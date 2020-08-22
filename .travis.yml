@@ -1,6 +1,6 @@
 language: python
 cache: pip
-#python:
+python:
 - '3.8'
 jobs:
   include:

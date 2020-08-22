@@ -11,9 +11,9 @@ jobs:
     #env:
     #- FORCE_FAIL=TRUE
   - stage: Deploy
-    # Only consider deployment if on the correct branch
-    #if: (branch = feature/tox-jobs-matrix-tryout)
-    if: (branch = feature/tox-jobs-matrix-tryout) AND (tag =~ /^[0-9]+\\.[0-9]+\\.[0-9]+$/)
+    # tp test conditions see https://docs.travis-ci.com/user/conditions-testing
+    # Only consider deployment if on the correct branch and a properly tagged version
+    if: (branch = feature/tox-jobs-matrix-tryout) AND (tag =~ ^[0-9]+\.[0-9]+\.[0-9]+$)
     #if: (branch = feature/tox-jobs-matrix-tryout)
     script: 
     - echo PHASE - script nothing to do

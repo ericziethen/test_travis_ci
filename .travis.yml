@@ -5,15 +5,15 @@ python:
   - '3.7'
 jobs:
   include:
-  - stage: Testing
-    name: Python 3.8 - Current Dev and Release
-    python: '3.8'
+  #- stage: Testing
+    #name: Python 3.8 - Current Dev and Release
+    #python: '3.8'
     #env:
     #- FORCE_FAIL=TRUE
   - stage: Deploy
     # Only consider deployment if on the correct branch
     #if: (branch = feature/tox-jobs-matrix-tryout)
-    if: (branch = feature/tox-jobs-matrix-tryout)
+    if: (branch = feature/tox-jobs-matrix-tryout) AND ($TRAVIS_TAG =~ "^[0-9]+\\.[0-9]+\\.[0-9]+$")
     script: 
     - echo PHASE - script nothing to do
       printenv

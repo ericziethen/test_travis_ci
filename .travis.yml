@@ -13,7 +13,8 @@ jobs:
   - stage: Deploy
     # Only consider deployment if on the correct branch
     #if: (branch = feature/tox-jobs-matrix-tryout)
-    if: (branch = feature/tox-jobs-matrix-tryout) AND (tag =~ ^[0-9]+\\.[0-9]+\\.[0-9]+$)
+    #if: (branch = feature/tox-jobs-matrix-tryout) AND (tag =~ ^[0-9]+\\.[0-9]+\\.[0-9]+$)
+    if: (branch = feature/tox-jobs-matrix-tryout)
     script: 
     - echo PHASE - script nothing to do
       printenv
@@ -21,7 +22,7 @@ jobs:
     - echo PHASE - before_deploy
       ./dev/Packaging/check_travis_release.sh
     deploy:
-      provider: pypi
+    - provider: pypi
       skip_cleanup: true
       distributions: sdist bdist_wheel
       server: https://test.pypi.org/legacy/

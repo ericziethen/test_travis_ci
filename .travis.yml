@@ -9,14 +9,14 @@ python:
 
 jobs:
   include:
-    - name: 'Paralel Job'
-      script: 
-      - echo PHASE - script nothing to do
-
   - python: 3.8
     env: MY_ENV=1
   - python: 3.7
     env: MY_ENV=1
+    - name: 'Paralel Job'
+      script: 
+      - echo PHASE - script nothing to do
+
 
     - stage: MyStage
       script: 

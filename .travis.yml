@@ -42,9 +42,9 @@ jobs:
 python:
   - '3.8'
   - '3.7'
-  env:
-    - MY_ENV=1
-    - MY_ENV=2
+env:
+  - MY_ENV=1
+  - MY_ENV=2
 
 before_install:
 - echo PHASE - before_install

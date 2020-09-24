@@ -4,14 +4,15 @@ python:
   - '3.8'
   - '3.7'
 jobs:
+
+  env:
+    - MY_ENV=1
+    - MY_ENV=2
+
   include:
     - name: 'Paralel Job'
       script: 
       - echo PHASE - script nothing to do
-
-    env:
-      - MY_ENV=1
-      - MY_ENV=2
 
     - stage: MyStage
       script: 

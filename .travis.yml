@@ -9,8 +9,8 @@ env:
 jobs:
   include:
     - name: 'Paralel Job'
-    script: 
-    - echo PHASE - script nothing to do
+      script: 
+      - echo PHASE - script nothing to do
   #- stage: Testing
     #name: Python 3.8 - Current Dev and Release
     #python: '3.8'

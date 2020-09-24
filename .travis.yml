@@ -11,42 +11,37 @@ jobs:
     - name: 'Paralel Job'
       script: 
       - echo PHASE - script nothing to do
-  #- stage: Testing
-    #name: Python 3.8 - Current Dev and Release
-    #python: '3.8'
-    #env:
-    #- FORCE_FAIL=TRUE
 
-  - stage: MyStage
-    script: 
-    - echo PHASE - script nothing to do
-    - printenv
+    - stage: MyStage
+      script: 
+      - echo PHASE - script nothing to do
+      - printenv
 
-  - stage: Deploy
-    # tp test conditions see https://docs.travis-ci.com/user/conditions-testing
-    # Only consider deployment if on the correct branch and a properly tagged version
-    #if: (branch = feature/tox-jobs-matrix-tryout) AND (tag =~ ^[0-9]+\.[0-9]+\.[0-9]+$)
-    if: (tag =~ ^[0-9]+\.[0-9]+\.[0-9]+$)
-    script: 
-    - echo PHASE - script nothing to do
-    - printenv
-    before_deploy:
-    - echo PHASE - before_deploy
-    - ./dev/Packaging/check_travis_release.sh
-    deploy:
-    - provider: pypi
-      skip_cleanup: true
-      distributions: sdist bdist_wheel
-      server: https://test.pypi.org/legacy/
-      user: __token__
-      password:
-        secure: ds2sytqAYPw5sl0h7hIkVo7LOpoUOfn2vFk3+arxNAS8kQ50wSJqNMtaxS/69Bozc24p0eU5Y5Zt4PZl0Y9/cHRllP6i1TIJ0Pxau14fNWbEbM4b23JXwoKgCvGPyS8Jrxl+3BrEWJ+VApFe91WN1wvMUq/Z2ia0bXktskL2WpYeqeBCVvLjk5m7duQLLkrjRxxY0Ss9VlpSczUkyNA6Qg7rlkz8OYZ9UkZWCEMx51LVQSj1vIWWR7/o8viJZo92GIHIp/lMrtNtw1rboYhsoLZJMrGA0ZEdIQccRCLts1hzj0W5GucA5SjnIyfOXjTomoDqKWdDV216PxgNmOS4VxTrEQuai/sckh25UOzcKIJynXhVaDrOh3b6+EX4MbeyRxOq7jPuviJOZM7Uk+VD+CU9rEfVocjfuDFpUJWhe+g8Hjp03HhJaGW0cr2rYMmsjmBQNe5RhGsqMxNX83mhQoBdQFhlfoN4HOKmyncPsjbB15I36RJgSCPwCdRrwCPCXD069Czqa9qzj2OcvKpEAWhMRazmRHoMu0UDKOuqt5DSjlP37ZIuqLNReAiogG0RngIYOqJ6jdxV82w13wmBlSWRqk3Ct0ZYzE8ozX5jtj03kqUYv4t29EVk9CGu5P4lCOAcs0H8yu6Cl32o3vVGyY1qMWA4+SyP74fh+Z+hHjc=
-      on:
-        tags: true
-        branch: master
+    - stage: Deploy
+      # tp test conditions see https://docs.travis-ci.com/user/conditions-testing
+      # Only consider deployment if on the correct branch and a properly tagged version
+      #if: (branch = feature/tox-jobs-matrix-tryout) AND (tag =~ ^[0-9]+\.[0-9]+\.[0-9]+$)
+      if: (tag =~ ^[0-9]+\.[0-9]+\.[0-9]+$)
+      script: 
+      - echo PHASE - script nothing to do
+      - printenv
+      before_deploy:
+      - echo PHASE - before_deploy
+      - ./dev/Packaging/check_travis_release.sh
+      deploy:
+      - provider: pypi
+        skip_cleanup: true
+        distributions: sdist bdist_wheel
+        server: https://test.pypi.org/legacy/
+        user: __token__
+        password:
+          secure: ds2sytqAYPw5sl0h7hIkVo7LOpoUOfn2vFk3+arxNAS8kQ50wSJqNMtaxS/69Bozc24p0eU5Y5Zt4PZl0Y9/cHRllP6i1TIJ0Pxau14fNWbEbM4b23JXwoKgCvGPyS8Jrxl+3BrEWJ+VApFe91WN1wvMUq/Z2ia0bXktskL2WpYeqeBCVvLjk5m7duQLLkrjRxxY0Ss9VlpSczUkyNA6Qg7rlkz8OYZ9UkZWCEMx51LVQSj1vIWWR7/o8viJZo92GIHIp/lMrtNtw1rboYhsoLZJMrGA0ZEdIQccRCLts1hzj0W5GucA5SjnIyfOXjTomoDqKWdDV216PxgNmOS4VxTrEQuai/sckh25UOzcKIJynXhVaDrOh3b6+EX4MbeyRxOq7jPuviJOZM7Uk+VD+CU9rEfVocjfuDFpUJWhe+g8Hjp03HhJaGW0cr2rYMmsjmBQNe5RhGsqMxNX83mhQoBdQFhlfoN4HOKmyncPsjbB15I36RJgSCPwCdRrwCPCXD069Czqa9qzj2OcvKpEAWhMRazmRHoMu0UDKOuqt5DSjlP37ZIuqLNReAiogG0RngIYOqJ6jdxV82w13wmBlSWRqk3Ct0ZYzE8ozX5jtj03kqUYv4t29EVk9CGu5P4lCOAcs0H8yu6Cl32o3vVGyY1qMWA4+SyP74fh+Z+hHjc=
+        on:
+          tags: true
+          branch: master
 
-    after_deploy:
-    - echo PHASE - after_deploy
+      after_deploy:
+      - echo PHASE - after_deploy
 
 before_install:
 - echo PHASE - before_install

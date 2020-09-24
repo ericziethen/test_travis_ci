@@ -13,6 +13,12 @@ jobs:
     #python: '3.8'
     #env:
     #- FORCE_FAIL=TRUE
+
+  - stage: MyStage
+    script: 
+    - echo PHASE - script nothing to do
+    - printenv
+
   - stage: Deploy
     # tp test conditions see https://docs.travis-ci.com/user/conditions-testing
     # Only consider deployment if on the correct branch and a properly tagged version

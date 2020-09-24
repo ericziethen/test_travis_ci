@@ -3,16 +3,20 @@ cache: pip
 python:
   - '3.8'
   - '3.7'
-jobs:
-
   env:
     - MY_ENV=1
     - MY_ENV=2
 
+jobs:
   include:
     - name: 'Paralel Job'
       script: 
       - echo PHASE - script nothing to do
+
+    - python: 3.8
+      env: MY_ENV=1
+    - python: 3.7
+      env: MY_ENV=1
 
     - stage: MyStage
       script: 

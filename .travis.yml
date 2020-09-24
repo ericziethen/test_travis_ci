@@ -9,9 +9,9 @@ python:
 
 jobs:
   include:
-    - python: "3.8"
+    - python: '3.8'
       env: MY_ENV=1
-    - python: "3.7"
+    - python: '3.7'
       env: MY_ENV=1
     - name: 'Paralel Job'
       script: 

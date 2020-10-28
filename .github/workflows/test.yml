@@ -36,3 +36,7 @@ jobs:
       - name: curl - get - 1
         run: |
           curl -u ericziethen:f18f342655b399820924d358f5b5c8de3973bf9d -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits
+
+      - name: curl - get - 2
+        run: |
+          curl -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits

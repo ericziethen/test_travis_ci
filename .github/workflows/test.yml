@@ -77,6 +77,12 @@ jobs:
       #   run: |
       #     eval "$SUPER_SECRET"
 
+      - name: curl - get - 4
+        env:
+          SUPER_SECRET: ${{ secrets.TEST_SECRET }}
+        run: |
+          curl -u ericziethen:$SUPER_SECRET -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits
+
       - name: Get Interaction Limits - Secret PW
         env:
           SUPER_SECRET: ${{ secrets.TEST_SECRET }}

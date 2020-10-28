@@ -41,7 +41,20 @@ jobs:
         run: |
           curl -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits
 
+
       - name: curl - get - 3
+        env:
+          SUPER_SECRET: ${{ secrets.TEST_SECRET }}
+        run: |
+          curl -u ericziethen:$SUPER_SECRET -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits
+
+      - name: curl - set - 1
+        env:
+          SUPER_SECRET: ${{ secrets.TEST_SECRET }}
+        run: |
+          curl -u ericziethen:$SUPER_SECRET -X PUT -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits -d '{"limit":"collaborators_only"}'
+
+      - name: curl - get - 4
         env:
           SUPER_SECRET: ${{ secrets.TEST_SECRET }}
         run: |

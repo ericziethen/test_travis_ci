@@ -32,3 +32,8 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           curl --version
+          curl \
+            -X PUT \
+            -H "Accept: application/vnd.github.sombra-preview+json" \
+            https://api.github.com/ericziethen/test_travis_ci/settings/interaction_limits \
+            -d '{"limit":"collaborators_only"}'

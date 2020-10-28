@@ -29,6 +29,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
+          curl -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/ericziethen/test_travis_ci/settings/interaction_limits
+          curl -H "Accept: application/vnd.github.sombra-preview+json" https://github.com/ericziethen/test_travis_ci/settings/interaction_limits
           echo Add other actions to build,
           echo test, and deploy your project.
           curl --version

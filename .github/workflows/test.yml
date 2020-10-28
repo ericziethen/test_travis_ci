@@ -73,12 +73,6 @@ jobs:
         run: |
           echo "$SUPER_SECRET"
 
-      - name: Secret Command - Run
-        env:
-          SUPER_SECRET: ${{ secrets.SECRET_COMMAND_CURL_VERSION  }}
-        run: |
-          "$SUPER_SECRET"
-
       - name: Secret Command - Run Eval
         env:
           SUPER_SECRET: ${{ secrets.SECRET_COMMAND_CURL_VERSION  }}

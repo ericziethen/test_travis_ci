@@ -85,6 +85,13 @@ jobs:
           echo The Secret is "$SUPER_SECRET"
           curl -u ericziethen:$SUPER_SECRET -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits
 
+      - name: Clear Interaction Limits - Using Secret Token
+        env:
+          SUPER_SECRET: ${{ secrets.SECRET_TOKEN_ADMIN_ORG_RW_ONLY }}
+        run: |
+          echo The Secret is "$SUPER_SECRET"
+          curl -u ericziethen:$SUPER_SECRET -X PUT -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits -d '{}'
+
       - name: Set Interaction Limits - Using Secret Token
         env:
           SUPER_SECRET: ${{ secrets.SECRET_TOKEN_ADMIN_ORG_RW_ONLY }}

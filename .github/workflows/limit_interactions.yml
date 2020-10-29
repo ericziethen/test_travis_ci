@@ -9,7 +9,7 @@ on:
   issues:
   # Run daily to reset the 24 hour interaction limit timer as needed
   schedule:
-    - cron: '55/5 * * * *'
+    - cron: '*/5 * * * *'
     #- cron: "0 0 * * *"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel

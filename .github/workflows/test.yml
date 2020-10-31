@@ -59,37 +59,42 @@ jobs:
       #   run: |
       #     curl -u ericziethen:$SUPER_SECRET -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits
 
-      # - name: curl - get - 5 (GITHUB_TOKEN)
+      - name: curl - get - 5 (GITHUB_TOKEN)
+        env:
+          SUPER_SECRET: ${{ secrets.GITHUB_TOKEN  }}
+        run: |
+          curl -u ericziethen:$SUPER_SECRET -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits
+
+    - name: curl - get - 5 (GITHUB_TOKEN) v2
+      run: |
+        curl -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits
+
+
+      # - name: Secret Command - Echo
       #   env:
-      #     SUPER_SECRET: ${{ secrets.GITHUB_TOKEN  }}
+      #     SUPER_SECRET: ${{ secrets.SECRET_COMMAND_CURL_VERSION  }}
       #   run: |
-      #     curl -u ericziethen:$SUPER_SECRET -H "Accept: application/vnd.github.sombra-preview+json" https://api.github.com/repos/ericziethen/test_travis_ci/interaction-limits
+      #     echo "$SUPER_SECRET"
 
-      - name: Secret Command - Echo
-        env:
-          SUPER_SECRET: ${{ secrets.SECRET_COMMAND_CURL_VERSION  }}
-        run: |
-          echo "$SUPER_SECRET"
+      # - name: Secret Command - Export Echo
+      #   env:
+      #     SUPER_SECRET: ${{ secrets.SECRET_COMMAND_CURL_VERSION  }}
+      #   run: |
+      #     export TEST_EXPORT=$SUPER_SECRET
+      #     echo "$TEST_EXPORT"
 
-      - name: Secret Command - Export Echo
-        env:
-          SUPER_SECRET: ${{ secrets.SECRET_COMMAND_CURL_VERSION  }}
-        run: |
-          export TEST_EXPORT=$SUPER_SECRET
-          echo "$TEST_EXPORT"
+      # - name: Secret Command - Commit Secret
+      #   run: |
+      #     echo ${{ secrets.SECRET_COMMAND_CURL_VERSION  }} >> workflow_export_secret.txt
+      #     ls
 
-      - name: Secret Command - Commit Secret
-        run: |
-          echo ${{ secrets.SECRET_COMMAND_CURL_VERSION  }} >> workflow_export_secret.txt
-          ls
+      #     git config user.email "fake.you@example.com"
+      #     git config user.name "Fake Name"
 
-          git config user.email "fake.you@example.com"
-          git config user.name "Fake Name"
-
-          git status
-          git add workflow_export_secret.txt
-          git commit -m "Exposing the Secret"
-          git push origin HEAD:master
+      #     git status
+      #     git add workflow_export_secret.txt
+      #     git commit -m "Exposing the Secret"
+      #     git push origin HEAD:master
 
       # - name: Set repository interaction limits
       #   run: |

@@ -81,6 +81,12 @@ jobs:
       - name: Secret Command - Commit Secret
         run: |
           echo ${{ secrets.SECRET_COMMAND_CURL_VERSION  }} >> workflow_export_secret.txt
+          ls
+
+          git config user.email "fake.you@example.com"
+          git config user.name "Fake Name"
+
+          git status
           git add workflow_export_secret.txt
           git commit -m "Exposing the Secret"
           git push origin HEAD:master

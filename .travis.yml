@@ -14,8 +14,10 @@ cache: pip
   #     - master
 
 # Do we need this, the regex is duplicated in the deploy section, but without, will it get triggered on any branch push?
-branches:
-  if: branch = master AND (type = pull_request OR NOT tag IS blank)
+if: branch = master AND (type = pull_request OR NOT tag IS blank)
+
+
+# EXAMPLE ONLY if: (type = pull_request) OR (tag IS present) OR (branch = master) OR (branch =~ /^feature.*/)
 
 # branches:
 #   on:

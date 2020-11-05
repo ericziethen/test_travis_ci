@@ -25,23 +25,22 @@ if: (branch = master AND type = pull_request) OR (branch =~ /^[0-9]+\.[0-9]+\.[0
 #   - development
 #   - /^v.*$/     # Tags need to start with 'v' to be recognized for deployment
 
-python:
-  - '3.9'  # Latest Stable Version on Top so Linting and Deployment pick this one
-
 jobs:
   include:
     - name: 'Test'
       os: linux
       dist: xenial
       python: "3.6"
-      before_install: echo before_install - Python 3.6
-      - echo run before_script
+      before_install:
+      - echo before_install - Python 3.6
+      - printenv
     - stage: Deploy
       # to test conditions see https://docs.travis-ci.com/user/conditions-testing
       # Only create a deployment stage for properly tagged branches
       if: (tag =~ ^[0-9]+\.[0-9]+\.[0-9]+$)
       install: 
-      - echo run before_script
+      - echo run install
+      - printenv
 
 
 

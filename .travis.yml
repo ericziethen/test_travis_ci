@@ -25,119 +25,150 @@ if: (branch = master AND type = pull_request) OR (branch =~ /^[0-9]+\.[0-9]+\.[0
 #   - development
 #   - /^v.*$/     # Tags need to start with 'v' to be recognized for deployment
 
-matrix:
+jobs:
   include:
-  - name: "Linux, Python 3.6"
-    os: linux
-    dist: xenial
-    python: "3.6"
-    before_install: echo before_install - Python 3.6
-  # - name: "Linux, Python 3.7.3"
-  #   os: linux
-  #   dist: xenial
-  #   python: "3.7.3"
-  #   before_install: echo before_install - Python 3.7.3
-  #   env: DEPLOY_ENABLED=True
-#  - name: "Windows, Python 3.6.8 (x32)"
-#    os: windows
-#    language: sh
-#    python: "3.6.8"
-#    before_install: choco install python --version=3.6.8 --x86
-#    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
-#  - name: "Windows, Python 3.6.8 (x64)"
-#    os: windows
-#    language: sh
-#    python: "3.6.8"
-#    before_install: choco install python --version=3.6.8
-#    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
-#  - name: "Windows, Python 3.7.3 (x32)"
-#    os: windows
-#    language: sh
-#    python: "3.7.3"
-#    before_install: choco install python --version=3.7.3 --x86
-#    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-#   - name: "Windows, Python 3.7.3 (x64)"
-#     os: windows
-#     language: sh
-#     python: "3.7.3"
-# #    before_install: choco install python --version=3.7.3
-#     env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+    - name: 'Test'
+      os: linux
+      dist: xenial
+      python: "3.6"
+      before_install:
+      - echo before_install - Python 3.6
+      - printenv
+    - stage: Deploy
+      # to test conditions see https://docs.travis-ci.com/user/conditions-testing
+      # Only create a deployment stage for properly tagged branches
+      if: (tag =~ ^[0-9]+\.[0-9]+\.[0-9]+$)
+      install: 
+      - echo run install
+      - printenv
 
 
-install:
-- echo run before_script
-
-# Check if the Merge Operation is allowed
-# - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/Travis/RunTravisTests.bat; fi
-# - if [ "$TRAVIS_OS_NAME" = "linux" ]; then . ./dev/Travis/RunTravisTests.sh; fi
-
-#- python --version --version
-#- python -m pip install --upgrade pip setuptools wheel
-# don't use the '--upgrade' to not upgrade pinned requirements with generic ones
-#- pip install -r Requirements/requirements-dev-for-release.txt
-#- pip install -r Requirements/requirements-dev-local.txt
-
-# Capture some information
-#- pip list
-
-before_script:
-- echo run before_script
-# Startup Test Server - !!! This might take a bit time, so in script we run linting first to give the startup enough time
-#- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_test_server.bat detached; fi
-#- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_test_server.sh detached; fi
-
-#- sleep 15 # Git the server some time to startup before tests are starting, we could also run the tests after Linting for a natural delay but this is ok for now
-
-#- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ping -c 4 127.0.0.1; fi
-#- if [ "$TRAVIS_OS_NAME" = "windows" ]; then ping -n 4 127.0.0.1; fi
-
-script:
-- echo run script
-# Run Tests
-#- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests.bat travis-ci; fi
-#- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_tests.sh; fi
-
-# Run Linting
-#- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_linters.bat; fi
-#- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_linters.sh; fi
-
-# Run Package Safety Checks
-#- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/check_package_safety_bare.bat; fi
-#- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/check_package_safety.sh; fi
-
-# Kill the Test Server
-#- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/kill_test_server.bat; fi
-
-# Kill Python processes - Travis doesn't set the title on Windows
-#- if [ "$TRAVIS_OS_NAME" = "windows" ]; then tasklist //fi "imagename eq python.exe"; fi
-#- if [ "$TRAVIS_OS_NAME" = "windows" ]; then taskkill //im python.exe //f; fi
 
 
-after_success:
-- codecov
 
-# Check the Deployment Conditions
-- echo TRAVIS_BRANCH $TRAVIS_BRANCH
-- echo DEPLOY_ENABLED $DEPLOY_ENABLED
-- echo TRAVIS_TAG $TRAVIS_TAG
 
-###
-### !!! DEPLOY MIGHT NOT BE WORKING ON WINDOWS YET
-### https://github.com/avast/yaramod/issues/19
-      # Travis should now support Windows CI environment but it's still in early access. There are multiple issues currently, some small, some bigger:
-      #   The biggest issue right now is that secrets cannot be used because they just randomly bring down VM. This is discussed here.
-      #   PyPI provider is not working on Windows. I have reported this issue however this is not blocker because it can be easily done using script provider and custom script which just sets up .pypirc, installs twine, runs sdist/bdist_wheel and twine upload.
-###
-### Either Deploy from Linux or Use manual Process in Script (but without secret still not safe)
-###
-### Create Releases Token: https://docs.travis-ci.com/user/deployment/releases/
+
+
+
+
+
+
+
+
+# matrix:
+#   include:
+#   - name: "Linux, Python 3.6"
+#     os: linux
+#     dist: xenial
+#     python: "3.6"
+#     before_install: echo before_install - Python 3.6
+#   # - name: "Linux, Python 3.7.3"
+#   #   os: linux
+#   #   dist: xenial
+#   #   python: "3.7.3"
+#   #   before_install: echo before_install - Python 3.7.3
+#   #   env: DEPLOY_ENABLED=True
+# #  - name: "Windows, Python 3.6.8 (x32)"
+# #    os: windows
+# #    language: sh
+# #    python: "3.6.8"
+# #    before_install: choco install python --version=3.6.8 --x86
+# #    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+# #  - name: "Windows, Python 3.6.8 (x64)"
+# #    os: windows
+# #    language: sh
+# #    python: "3.6.8"
+# #    before_install: choco install python --version=3.6.8
+# #    env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+# #  - name: "Windows, Python 3.7.3 (x32)"
+# #    os: windows
+# #    language: sh
+# #    python: "3.7.3"
+# #    before_install: choco install python --version=3.7.3 --x86
+# #    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+# #   - name: "Windows, Python 3.7.3 (x64)"
+# #     os: windows
+# #     language: sh
+# #     python: "3.7.3"
+# # #    before_install: choco install python --version=3.7.3
+# #     env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+
+
+# install:
+# - echo run before_script
+
+# # Check if the Merge Operation is allowed
+# # - if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/Travis/RunTravisTests.bat; fi
+# # - if [ "$TRAVIS_OS_NAME" = "linux" ]; then . ./dev/Travis/RunTravisTests.sh; fi
+
+# #- python --version --version
+# #- python -m pip install --upgrade pip setuptools wheel
+# # don't use the '--upgrade' to not upgrade pinned requirements with generic ones
+# #- pip install -r Requirements/requirements-dev-for-release.txt
+# #- pip install -r Requirements/requirements-dev-local.txt
+
+# # Capture some information
+# #- pip list
+
+# before_script:
+# - echo run before_script
+# # Startup Test Server - !!! This might take a bit time, so in script we run linting first to give the startup enough time
+# #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_test_server.bat detached; fi
+# #- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_test_server.sh detached; fi
+
+# #- sleep 15 # Git the server some time to startup before tests are starting, we could also run the tests after Linting for a natural delay but this is ok for now
+
+# #- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ping -c 4 127.0.0.1; fi
+# #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then ping -n 4 127.0.0.1; fi
+
+# script:
+# - echo run script
+# - printenv
+# # Run Tests
+# #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_tests.bat travis-ci; fi
+# #- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_tests.sh; fi
+
+# # Run Linting
+# #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/run_linters.bat; fi
+# #- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/run_linters.sh; fi
+
+# # Run Package Safety Checks
+# #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/check_package_safety_bare.bat; fi
+# #- if [ "$TRAVIS_OS_NAME" = "linux" ]; then ./dev/check_package_safety.sh; fi
+
+# # Kill the Test Server
+# #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then dev/kill_test_server.bat; fi
+
+# # Kill Python processes - Travis doesn't set the title on Windows
+# #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then tasklist //fi "imagename eq python.exe"; fi
+# #- if [ "$TRAVIS_OS_NAME" = "windows" ]; then taskkill //im python.exe //f; fi
+
+
+# after_success:
+# - codecov
+
+# # Check the Deployment Conditions
+# - echo TRAVIS_BRANCH $TRAVIS_BRANCH
+# - echo DEPLOY_ENABLED $DEPLOY_ENABLED
+# - echo TRAVIS_TAG $TRAVIS_TAG
+
+# ###
+# ### !!! DEPLOY MIGHT NOT BE WORKING ON WINDOWS YET
+# ### https://github.com/avast/yaramod/issues/19
+#       # Travis should now support Windows CI environment but it's still in early access. There are multiple issues currently, some small, some bigger:
+#       #   The biggest issue right now is that secrets cannot be used because they just randomly bring down VM. This is discussed here.
+#       #   PyPI provider is not working on Windows. I have reported this issue however this is not blocker because it can be easily done using script provider and custom script which just sets up .pypirc, installs twine, runs sdist/bdist_wheel and twine upload.
+# ###
+# ### Either Deploy from Linux or Use manual Process in Script (but without secret still not safe)
+# ###
+# ### Create Releases Token: https://docs.travis-ci.com/user/deployment/releases/
 # deploy:
 #   - provider: pypi
-#     skip_cleanup: true
-#     distributions: sdist bdist_wheel
-#     server: https://test.pypi.org/legacy/ # Remove for deployment to official PyPi repo
-#     user: ericziethen
-#     password:
+#     # skip_cleanup: true
+#     # distributions: sdist bdist_wheel
+#     # server: https://test.pypi.org/legacy/ # Remove for deployment to official PyPi repo
+#     # user: ericziethen
+#     # password:
 #       secure: klO6q5TqLVeYqvNQ2+chlW5wsbFMQ4BM+5Cf1rcFslysk3i9sUjH4Y4etA5pSqHiPEI2/MsUffIDmPLn5DkSO/4gT9wljUJJJWoC+W2PZMx2lnzUX70MPQ4v7Vel6Y286e1P8i10DlZe6W4Mq7RcdwO2OoYrJ5ZVZCEUiZngrOeOrESmpNGXbI1M9/osrwnGlmw6tJjMFJqSKXUMQX/WYHhwX3EXOZBzZS4s/AEx/ScY/rrtHr+E7YccvGcrG5796flFHUN3vKuWP0NBqZrMrY4rJRSpnWNENjre4U8jvDb74vYfFQvU09wYuuqNOI1fwj1LjyPigQ/TtS4q8aq/0m03adSLBB7E8LlyP6TjtduMhUExinEZQOuTL6AiudhEYUooDOWznhaGyQfFq9Sh59/VDGn+ew2+dXSbZ3+rV3o6KU0HkEUpd9Hvc25979geAaUuz5qVC1nnqqe2V3WehPzfzCBoZO51Rxo/A0gSaAVj9Hy6AKzFW5AQKwbtau5tbmPYNir33ipHzOpUI7xXk54rj2BJAmDzKMa35EKr5uBGh2SIgmksgjcIwFfwzmTGW5HNf9hoO/G4ILtOg85HzZ4JS7gbQM5avQqFOIIyl29v+XuFi18gH4haMRMEamP3sjGnBFMXfBaveBSnGcH6XfsiyQQiy6nklRifxkwGxXk=
 #     on:
 #       condition: $DEPLOY_ENABLED = "True" && "$TRAVIS_TAG =~ ^v.*$"

@@ -6,12 +6,24 @@ cache: pip
 # Create athe Same Travis with Build Stages, so only deploy if build ok on all jobs
 # https://docs.travis-ci.com/user/build-stages/
 
+  # push:
+  #   branches:
+  #     - /^v.*$/     # Tags need to start with 'v' to be recognized for deployment
+  # pull_request:
+  #   branches:
+  #     - master
+
 # Do we need this, the regex is duplicated in the deploy section, but without, will it get triggered on any branch push?
-branches:
-  only:
-  - master
-  - development
-  - /^v.*$/     # Tags need to start with 'v' to be recognized for deployment
+if: branch = master AND (type = pull_request OR NOT tag IS blank)
+
+
+# EXAMPLE ONLY if: (type = pull_request) OR (tag IS present) OR (branch = master) OR (branch =~ /^feature.*/)
+
+# branches:
+#   on:
+#   - master
+#   - development
+#   - /^v.*$/     # Tags need to start with 'v' to be recognized for deployment
 
 matrix:
   include:
